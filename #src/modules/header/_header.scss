@@ -1,0 +1,14 @@
+header{
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+//СТИЛИ ДЛЯ ШАПКИ HEADER
+@import 'header_title/_header_title';
+
+//CТИЛИ ДЛЯ ЛАМПЫ И ТЕКСТА ПОД НЕЙ
+@import 'lamp_mechanism/_lamp_mechanism';
+
+//CТИЛИ ДЛЯ НАДПИСИ SCROLL DOWN
+@import 'scroll_down/_scroll_down';

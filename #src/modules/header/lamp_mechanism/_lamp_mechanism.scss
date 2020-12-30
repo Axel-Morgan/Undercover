@@ -1,0 +1,116 @@
+//ГЛАВНЫЙ КОНТЕЙНЕР 
+.header__lamp-mechanism{
+    width: 100%;
+    min-height: 350px;
+    margin-top: 30px;
+    flex-direction: column;
+    align-items: center;
+}
+
+//КОНТЕЙНЕР С ЛАМПОЙ
+.lamp__container{
+    width: 200px;
+    height: 200px;
+    position: relative;
+    flex-direction: row;
+    justify-content: center;
+
+    //Рукоядка
+    .lamp-reload{
+        position: absolute;
+        width: 130px;
+        height: 200px;
+        cursor: pointer;
+        z-index: 1;
+    }
+
+    //Эффект освещения
+    .lamp-light{
+        width: 500px;
+        height: 500px;
+        position: absolute;
+        margin-top: -140px;
+        background: radial-gradient(40% 40%, rgba(245, 227, 64, 0.06), rgba(245, 227, 64, 0));
+    }
+
+    //Лампочка
+    .lamp{
+        width: inherit;
+        height: inherit;
+        position: absolute;
+        background-image: url(../images/header/lamp.png);
+        background-size: 100% 100%;
+        z-index: -2;
+        opacity: 0.6;
+        transition: width 0.5s, height 0.5s;
+    }
+}
+
+//КОНТЕЙНЕР СО СЛОГАНОМ 
+.slogan{
+    margin-top: 30px;
+
+    //Отдельно взятый символ
+    span{
+        color: hslConv($lightGold);
+        font-family: ub-light;
+        font-size: 45px;
+        text-transform: uppercase;
+        transition: 0.3s ease-out;
+    }
+}
+
+//ДО 1200PX Ширины экрана
+@media screen and (max-width: 1200px){
+    .slogan{
+        //Отдельно взятый символ
+        span{
+            font-size: 35px;
+        }
+    }
+
+    .lamp__container{
+        width: 170px;
+        height: 170px;
+        //Рукоядка
+
+        .lamp-reload{
+            width: 130px;
+            height: 200px;
+        }
+    
+        //Эффект освещения
+        .lamp-light{
+            width: 500px;
+            height: 500px;
+            margin-top: -160px;
+        }
+    }
+}
+
+@media screen and (max-width: 840px){
+    .slogan{
+        //Отдельно взятый символ
+        span{
+            font-size: 26px;
+        }
+    }
+
+    .lamp__container{
+        width: 140px;
+        height: 140px;
+        //Рукоядка
+
+        .lamp-reload{
+            width: 90px;
+            height: 140px;
+        }
+    
+        //Эффект освещения
+        .lamp-light{
+            width: 400px;
+            height: 400px;
+            margin-top: -110px;
+        }
+    }
+}

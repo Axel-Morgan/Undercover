@@ -1,0 +1,20 @@
+/* Box sizing*/
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+header, footer, section, div, p, h1, h2, h3, h4, h5, h6{
+  display: flex;
+}
+
+body{
+  flex-direction: column;
+  width: 100%;
+  padding: 0px 5%;
+  background-color: hslConv($bgColor);
+}

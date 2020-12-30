@@ -1,0 +1,26 @@
+//ГЛАВНЫЙ КОНТЕЙНЕР
+.header__scroll-name{
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+
+    //Надпись Scroll down for more
+    p{
+        color: hslConv($darkGray);
+        text-transform: uppercase;
+        font-family: ub-light;
+        font-size: 22px;
+    }
+
+    //Стрелка вниз
+    .arrow-down{
+        width: 30px;
+        height: 30px;
+        position: absolute;
+        margin-top: 20px;
+        border-width: 0px 2px 2px 0px;
+        border-style: solid;
+        border-color: hslConv($darkGray);
+        transform: rotate(45deg);
+    }
+}

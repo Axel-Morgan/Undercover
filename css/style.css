@@ -1,0 +1,286 @@
+@charset "UTF-8";
+/*-----------------ОСНОВНЫЕ ЦВЕТА-----------------*/
+/*---------------ОБНУЛЕНИЕ И ОБЩИЕ ПРАВИЛА----------------*/
+/* Box sizing*/
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+header, footer, section, div, p, h1, h2, h3, h4, h5, h6 {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+}
+
+body {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  width: 100%;
+  padding: 0px 5%;
+  background-color: hsl(0, 0%, 13.4%);
+}
+
+/*--------------------------ШАПКА-------------------------*/
+header {
+  width: 100%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.header__name {
+  width: 100%;
+  min-height: 200px;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.names__container {
+  width: auto;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.names__container hr {
+  position: relative;
+  top: 10px;
+  width: 100%;
+  height: 1px;
+  background-color: hsl(39, 30.8%, 55.1%);
+}
+
+.names__container h1 {
+  width: 100%;
+  color: #b09769;
+  letter-spacing: 2px;
+  font-size: 45px;
+  text-transform: uppercase;
+  font-family: pd-regular;
+}
+
+.names__container p {
+  width: 100%;
+  position: relative;
+  left: 90px;
+  color: hsl(0, 0%, 64.7%);
+  font-family: ub-light;
+  font-size: 25px;
+  text-transform: uppercase;
+  -webkit-box-pack: end;
+      -ms-flex-pack: end;
+          justify-content: flex-end;
+}
+
+.header__lamp-mechanism {
+  width: 100%;
+  min-height: 350px;
+  margin-top: 30px;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.lamp__container {
+  width: 200px;
+  height: 200px;
+  position: relative;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.lamp__container .lamp-reload {
+  position: absolute;
+  width: 130px;
+  height: 200px;
+  cursor: pointer;
+  z-index: 1;
+}
+
+.lamp__container .lamp-light {
+  width: 500px;
+  height: 500px;
+  position: absolute;
+  margin-top: -140px;
+  background: radial-gradient(40% 40%, rgba(245, 227, 64, 0.06), rgba(245, 227, 64, 0));
+}
+
+.lamp__container .lamp {
+  width: inherit;
+  height: inherit;
+  position: absolute;
+  background-image: url(../images/header/lamp.png);
+  background-size: 100% 100%;
+  z-index: -2;
+  opacity: 0.6;
+  -webkit-transition: width 0.5s, height 0.5s;
+  transition: width 0.5s, height 0.5s;
+}
+
+.slogan {
+  margin-top: 30px;
+}
+
+.slogan span {
+  color: hsl(39, 35.1%, 55.9%);
+  font-family: ub-light;
+  font-size: 45px;
+  text-transform: uppercase;
+  -webkit-transition: 0.3s ease-out;
+  transition: 0.3s ease-out;
+}
+
+@media screen and (max-width: 1200px) {
+  .slogan span {
+    font-size: 35px;
+  }
+  .lamp__container {
+    width: 170px;
+    height: 170px;
+  }
+  .lamp__container .lamp-reload {
+    width: 130px;
+    height: 200px;
+  }
+  .lamp__container .lamp-light {
+    width: 500px;
+    height: 500px;
+    margin-top: -160px;
+  }
+}
+
+@media screen and (max-width: 840px) {
+  .slogan span {
+    font-size: 26px;
+  }
+  .lamp__container {
+    width: 140px;
+    height: 140px;
+  }
+  .lamp__container .lamp-reload {
+    width: 90px;
+    height: 140px;
+  }
+  .lamp__container .lamp-light {
+    width: 400px;
+    height: 400px;
+    margin-top: -110px;
+  }
+}
+
+.header__scroll-name {
+  width: 100%;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.header__scroll-name p {
+  color: hsl(0, 0%, 23.5%);
+  text-transform: uppercase;
+  font-family: ub-light;
+  font-size: 22px;
+}
+
+.header__scroll-name .arrow-down {
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  margin-top: 20px;
+  border-width: 0px 2px 2px 0px;
+  border-style: solid;
+  border-color: hsl(0, 0%, 23.5%);
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+
+/*-------------------------ШРИФТЫ-------------------------*/
+@font-face {
+  font-family: 'pd-black-italic';
+  src: url("../fonts/PlayfairDisplaySC-BlackItalic.ttf") format("truetype");
+  font-weight: 900;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'pd-black';
+  src: url("../fonts/PlayfairDisplaySC-Black.ttf") format("truetype");
+  font-weight: 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'pd-bold';
+  src: url("../fonts/PlayfairDisplaySC-Bold.ttf") format("truetype");
+  font-weight: bold;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'pd-bold-italic';
+  src: url("../fonts/PlayfairDisplaySC-BoldItalic.ttf") format("truetype");
+  font-weight: bold;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'pd-italic';
+  src: url("../fonts/PlayfairDisplaySC-Italic.ttf") format("truetype");
+  font-weight: normal;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'pd-regular';
+  src: url("../fonts/PlayfairDisplaySC-Regular.ttf") format("truetype");
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'ub-light';
+  src: url("../fonts/Ubuntu-Light.ttf") format("truetype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
