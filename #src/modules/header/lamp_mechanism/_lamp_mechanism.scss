@@ -15,8 +15,8 @@
     flex-direction: row;
     justify-content: center;
 
-    //Рукоядка
-    .lamp-reload{
+    //Коллайдер для лампы (Область воздействия)
+    .lamp-collider{
         position: absolute;
         width: 130px;
         height: 200px;
@@ -43,7 +43,14 @@
         z-index: -2;
         opacity: 0.6;
         transition: width 0.5s, height 0.5s;
+        animation: lamp-flashes 0s infinite ease-in-out;
     }
+}
+
+@keyframes lamp-flashes{
+    from { opacity: 0.6; }
+    50% { opacity: 0; }
+    to { opacity: 0.6; }
 }
 
 //КОНТЕЙНЕР СО СЛОГАНОМ 
@@ -74,7 +81,7 @@
         height: 170px;
         //Рукоядка
 
-        .lamp-reload{
+        .lamp-collider{
             width: 130px;
             height: 200px;
         }
@@ -101,7 +108,7 @@
         height: 140px;
         //Рукоядка
 
-        .lamp-reload{
+        .lamp-collider{
             width: 90px;
             height: 140px;
         }

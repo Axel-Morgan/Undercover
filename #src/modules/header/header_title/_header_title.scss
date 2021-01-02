@@ -43,3 +43,17 @@
         justify-content: flex-end;
     }
 }
+
+@media screen and (max-width: 840px){
+    .names__container{
+        //Названия сайта 
+        h1{
+            font-size: 35px;
+        }
+    
+        //Текст под названием сайта
+        p{
+            font-size: 20px;
+        }
+    }
+}
