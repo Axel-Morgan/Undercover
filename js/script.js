@@ -120,12 +120,8 @@ function forLampMouseDown(){
     cursorLamp.isJammed = true;
 }
 
-lampMechanism.lampCollider.addEventListener("mousedown", function(){ 
+lampMechanism.lampCollider.addEventListener("mousedown touchstart", function(){ 
     forLampMouseDown(); //Мышка
-});
-
-lampMechanism.lampCollider.addEventListener("touchstart", function(){ 
-    forLampMouseDown(); //Тачскрин 
 });
 
 //-----------------------ЛКМ отжата 
@@ -137,12 +133,8 @@ function forLampMouseUp(){
     returnLampOnStart(lampMechanism.lampContainer);
 }
 
-document.addEventListener("mouseup", function(){ 
+document.addEventListener("mouseup touchend", function(){ 
     forLampMouseUp(); //Мышка
-});
-
-document.addEventListener("touchend", function(){ 
-    forLampMouseUp(); //Тачскрин 
 });
 
 //-----------------------Курсор двигается с зажатой ЛКМ
@@ -152,11 +144,7 @@ function forLampMouseMove(){
     }
 }
 
-lampMechanism.lampCollider.addEventListener("mousemove", function(){ 
+lampMechanism.lampCollider.addEventListener("mousemove touchmove", function(){ 
     forLampMouseMove(); //Мышка
-});
-
-lampMechanism.lampCollider.addEventListener("touchmove", function(){ 
-    forLampMouseMove(); //Тачскрин 
 });
 
