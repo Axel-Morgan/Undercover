@@ -146,23 +146,23 @@ function changeColorLetters(shift){
 
 //-----------------------EVENT LISTENER-----------------------
 //-----------------------Зажата ЛКМ на коллайдере лампы
-function forLampMouseDown(){
-    event.preventDefault();
-    cursorLamp.xPosition = event.clientX; 
+function forLampMouseDown(device){
+    if(device == true)  cursorLamp.xPosition = event.clientX; 
+    else cursorLamp.xPosition = event.changedTouches[0].clientX;
     cursorLamp.isJammed = true;
 }
 
 lampMechanism.lampCollider.addEventListener("mousedown", function(){ 
-    forLampMouseDown(); //Мышка
+    event.preventDefault();
+    forLampMouseDown(true); //Мышка
 });
 
 lampMechanism.lampCollider.addEventListener("touchstart", function(){
-    forLampMouseDown(); //Тачскрин
+    forLampMouseDown(false); //Тачскрин
 });
 
 //-----------------------ЛКМ отжата 
 function forLampMouseUp(){
-    event.preventDefault();
     cursorLamp.isJammed = false;
     underLampText.isTextFlshes = false;
     lampFlashes(false);
@@ -171,10 +171,11 @@ function forLampMouseUp(){
 }
 
 document.addEventListener("mouseup", function(){ 
+    event.preventDefault();
     forLampMouseUp(); //Мышка
 });
 
-document.addEventListener("touchend", function(){ 
+document.addEventListener("touchend", function(){
     forLampMouseUp(); //Тачскрин
 });
 
@@ -183,17 +184,15 @@ document.addEventListener("touchcancel", function(){
 });
 
 //-----------------------Курсор двигается с зажатой ЛКМ
-function forLampMouseMove(){
-    if (cursorLamp.isJammed == true){ 
+lampMechanism.lampCollider.addEventListener("mousemove", function(){ 
+    if (cursorLamp.isJammed == true){
         moveLampContainer(event.clientX, underLampText.sloganContainer.offsetWidth);
     }
-}
-
-lampMechanism.lampCollider.addEventListener("mousemove", function(){ 
-    forLampMouseMove(); //Мышка
 });
 
 lampMechanism.lampCollider.addEventListener("touchmove", function(){ 
-    forLampMouseMove(); //Тачскрин
+    if (cursorLamp.isJammed == true){ 
+        moveLampContainer(event.changedTouches[0].clientX, underLampText.sloganContainer.offsetWidth);
+    }
 });
 
