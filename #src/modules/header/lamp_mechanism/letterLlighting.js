@@ -11,7 +11,9 @@ var lampMechanism = {
     lampRestrictionMovement: 2.5,
     lampCollider: document.querySelector('.lampCollider_Js'),
     lampContainer: document.querySelector('.lampContainer_Js'),
-    lampImage: document.querySelector('.lamp')
+    lampImage: document.querySelector('.lamp'),
+    lampSpeedFlashes: 0.8,
+    lampPowerLighting: 2
 };
 
 //То, что имеет отношение к котейнеру с текстом
@@ -47,14 +49,14 @@ function moveLampContainer(x, wSC){
         lCont.style.right = shift + 'px';
 
         if ((shift < -wSC/lRM * 0.8) || (shift > wSC/lRM * 0.8)){
-            lampFlashes(true); //Лампа мигает 
+            lampFlashes(true, lampMechanism.lampSpeedFlashes); //Лампа мигает 
         }
         else{ 
             lampFlashes(false); // Лампа не мигает
         }
     }
     else{
-        lampFlashes(false); // Лампа не мигает
+        lampFlashes(false, ); // Лампа не мигает
         returnLampOnStart(lCont); //Возвращаем на место лампу
     }
 
@@ -63,7 +65,7 @@ function moveLampContainer(x, wSC){
 }
 
 //-----------------------Заставляем лампу мигать при приближении к границе
-function lampFlashes(boolFlashes, speedAnimation = 0.7){
+function lampFlashes(boolFlashes, speedAnimation){
     let lImg = lampMechanism.lampImage;
 
     if (boolFlashes == false){
@@ -80,13 +82,14 @@ function returnLampOnStart(obj){
 }
 
 //-----------------------Подсвечиваем текст в зависимости от положения текста
-function changeColorLetters(shift, hue = underLampText.hue, saturate = underLampText.saturate, lightness = underLampText.lightness){
+function changeColorLetters(shift){
     let nLet = underLampText.sloganLetters,
+        hue = underLampText.hue, saturate = underLampText.saturate, lightness = underLampText.lightness
         widthContainerLetters = underLampText.sloganContainer.offsetWidth,
         fontSize = parseInt(window.getComputedStyle(underLampText.sloganLetters[0], null).getPropertyValue('font-size'), 10),
         h = hue, s = saturate, l = lightness,
         borderS = underLampText.loverBoundSaturate, borderL = underLampText.loverBoundLightness,
-        coefficient = 0,
+        pL = lampMechanism.lampPowerLighting, coefficient = 0,
         startPoint = 0;
     
     coefficient = 100/fontSize * 0.8;
@@ -94,9 +97,9 @@ function changeColorLetters(shift, hue = underLampText.hue, saturate = underLamp
     startPoint = parseInt(startPoint/nLet.length * coefficient);    
 
     for (let i = startPoint; i >= 0; i--){
-        s = s - (startPoint - i);
+        s = pL + s - (startPoint - i);
         if (s < borderS) s = borderS;
-        l = l - (startPoint - i);
+        l = pL + l - (startPoint - i);
         if (l < borderL) l = borderL;
         nLet[i].style.color = 'hsl(' + h + ', ' + s + '%, '+ l +'%)';
     }
@@ -104,9 +107,9 @@ function changeColorLetters(shift, hue = underLampText.hue, saturate = underLamp
    h = hue; s = saturate; l = lightness;
 
     for (let i = startPoint; i < nLet.length; i++){
-        s = s + (startPoint - i);
+        s = pL + s + (startPoint - i);
         if (s < borderS) s = borderS;
-        l = l + (startPoint - i);
+        l = pL + l + (startPoint - i);
         if (l < borderL) l = borderL;
         nLet[i].style.color = 'hsl(' + h + ', ' + s + '%, '+ l +'%)';
     }
@@ -124,10 +127,6 @@ lampMechanism.lampCollider.addEventListener("mousedown", function(){
     forLampMouseDown(); //Мышка
 });
 
-lampMechanism.lampCollider.addEventListener("touchstart", function(){ 
-    forLampMouseDown(); //Тачскрин 
-});
-
 //-----------------------ЛКМ отжата 
 function forLampMouseUp(){
     event.preventDefault();
@@ -141,10 +140,6 @@ document.addEventListener("mouseup", function(){
     forLampMouseUp(); //Мышка
 });
 
-document.addEventListener("touchend", function(){ 
-    forLampMouseUp(); //Тачскрин 
-});
-
 //-----------------------Курсор двигается с зажатой ЛКМ
 function forLampMouseMove(){
     if (cursorLamp.isJammed == true){ 
@@ -154,9 +149,5 @@ function forLampMouseMove(){
 
 lampMechanism.lampCollider.addEventListener("mousemove", function(){ 
     forLampMouseMove(); //Мышка
-});
-
-lampMechanism.lampCollider.addEventListener("touchmove", function(){ 
-    forLampMouseMove(); //Тачскрин 
 });
 

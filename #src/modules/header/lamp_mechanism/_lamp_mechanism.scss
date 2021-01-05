@@ -1,13 +1,14 @@
+$startFont_span: 45;
+
 //ГЛАВНЫЙ КОНТЕЙНЕР 
 .header__lamp-mechanism{
     width: 100%;
-    min-height: 350px;
     margin-top: 30px;
     flex-direction: column;
     align-items: center;
 }
 
-//КОНТЕЙНЕР С ЛАМПОЙ
+/*----КОНТЕЙНЕР С ЛАМПОЙ----*/
 .lamp__container{
     width: 200px;
     height: 200px;
@@ -38,7 +39,7 @@
         width: inherit;
         height: inherit;
         position: absolute;
-        background-image: url(../images/header/lamp.png);
+        background-image: $lamp;
         background-size: 100% 100%;
         z-index: -2;
         opacity: 0.6;
@@ -67,12 +68,40 @@
     }
 }
 
+//ДО 1600PX Ширины экрана
+@media screen and (min-width: 1600px){
+    .slogan{
+        //Отдельно взятый символ
+        span{
+            font-size: calcSize($startFont_span, 1600);
+        }
+    }
+
+    .lamp__container{
+        width: 240px;
+        height: 240px;
+        //Рукоядка
+
+        .lamp-collider{
+            width: 130px;
+            height: 200px;
+        }
+    
+        //Эффект освещения
+        .lamp-light{
+            width: 500px;
+            height: 500px;
+            margin-top: -160px;
+        }
+    }
+}
+
 //ДО 1200PX Ширины экрана
 @media screen and (max-width: 1200px){
     .slogan{
         //Отдельно взятый символ
         span{
-            font-size: 35px;
+            font-size: calcSize($startFont_span, 1200);
         }
     }
 
@@ -95,11 +124,22 @@
     }
 }
 
+//ДО 950PX Ширины экрана
+@media screen and (max-width: 950px){
+    .slogan{
+        //Отдельно взятый символ
+        span{
+            font-size: calcSize($startFont_span, 950);
+        }
+    }
+}
+
+//ДО 840PX Ширины экрана
 @media screen and (max-width: 840px){
     .slogan{
         //Отдельно взятый символ
         span{
-            font-size: 26px;
+            font-size: calcSize($startFont_span, 840);
         }
     }
 
@@ -121,3 +161,72 @@
         }
     }
 }
+
+//ДО 700PX Ширины экрана
+@media screen and (max-width: 700px){
+    .slogan{
+        //Отдельно взятый символ
+        span{
+            font-size: calcSize($startFont_span, 700);
+        }
+    }
+}
+
+//ДО 600PX Ширины экрана
+@media screen and (max-width: 600px){
+    .slogan{
+        //Отдельно взятый символ
+        span{
+            font-size: calcSize($startFont_span, 600);
+        }
+    }
+
+    .lamp__container{
+        width: 110px;
+        height: 110px;
+        //Рукоядка
+
+        .lamp-collider{
+            width: 60px;
+            height: 110px;
+        }
+    
+        //Эффект освещения
+        .lamp-light{
+            width: 330px;
+            height: 300px;
+            margin-top: -90px;
+        }
+    }
+}
+
+//ДО 500PX Ширины экрана
+@media screen and (max-width: 500px){
+    .slogan{
+        //Отдельно взятый символ
+        span{
+            font-size: calcSize($startFont_span, 500);
+        }
+    }
+}
+
+//ДО 500PX Ширины экрана
+@media screen and (max-width: 400px){
+    .slogan{
+        //Отдельно взятый символ
+        span{
+            font-size: calcSize($startFont_span, 400);
+        }
+    }
+}
+
+@media screen and (max-width: 350px){
+    .slogan{
+        //Отдельно взятый символ
+        span{
+            font-size: calcSize($startFont_span, 350);
+        }
+    }
+}
+
+

@@ -1,3 +1,7 @@
+//Локальные переменные 
+$startFontP: 25;
+$startFontH1: 45;
+
 //ГЛАВНЫЙ КОНТЕЙНЕР
 .header__name{
     width: 100%;
@@ -14,6 +18,7 @@
 
     //Декоративная линия над надписью
     hr{
+
         position: relative;
         top: 10px;
         width: 100%;
@@ -35,7 +40,7 @@
     p{
         width: 100%;
         position: relative;
-        left: 90px;
+        left: 30%;
         color: hslConv($lightGray);
         font-family: ub-light;
         font-size: 25px;
@@ -44,16 +49,58 @@
     }
 }
 
-@media screen and (max-width: 840px){
+//ОТ 1600PX Ширины экрана
+@media screen and (min-width: 1600px){
     .names__container{
+        hr{
+            top: 15px;
+        }
         //Названия сайта 
         h1{
-            font-size: 35px;
+            font-size: calcSize($startFontH1, 1600);
         }
     
         //Текст под названием сайта
         p{
-            font-size: 20px;
+            font-size: calcSize($startFontP, 1600);
+        }
+    }
+    
+}
+
+//ДО 840PX Ширины экрана
+@media screen and (max-width: 840px){
+    .names__container{
+        hr{
+            top: 5px;
+        }
+
+        //Названия сайта 
+        h1{
+            font-size: calcSize($startFontH1, 840);
+        }
+    
+        //Текст под названием сайта
+        p{
+            font-size: calcSize($startFontP, 840);
+        }
+    }
+}
+
+@media screen and (max-width: 650px){
+    .names__container{
+        hr{
+            top: 2px;
+        }
+
+        //Названия сайта 
+        h1{
+            font-size: calcSize($startFontH1, 650);
+        }
+    
+        //Текст под названием сайта
+        p{
+            font-size: calcSize($startFontP, 650);
         }
     }
 }
