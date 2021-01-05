@@ -22,6 +22,7 @@ $startFont_span: 45;
         width: 130px;
         height: 200px;
         cursor: pointer;
+        outline: none;
         z-index: 1;
     }
 
@@ -32,6 +33,7 @@ $startFont_span: 45;
         position: absolute;
         margin-top: -140px;
         background: radial-gradient(40% 40%, rgba(245, 227, 64, 0.06), rgba(245, 227, 64, 0));
+        animation: flashes 0s infinite ease-in-out;
     }
 
     //Лампочка
@@ -44,13 +46,17 @@ $startFont_span: 45;
         z-index: -2;
         opacity: 0.6;
         transition: width 0.5s, height 0.5s;
-        animation: lamp-flashes 0s infinite ease-in-out;
+        animation: flashes 0s infinite ease-in-out;
     }
 }
 
-@keyframes lamp-flashes{
+@keyframes flashesForLampText{
+    50% {color: hslConv($darkGray)}
+}
+
+@keyframes flashes{
     from { opacity: 0.6; }
-    50% { opacity: 0; }
+    50% { opacity: 0.1; }
     to { opacity: 0.6; }
 }
 
@@ -83,8 +89,8 @@ $startFont_span: 45;
         //Рукоядка
 
         .lamp-collider{
-            width: 130px;
-            height: 200px;
+            width: 180px;
+            height: 250px;
         }
     
         //Эффект освещения

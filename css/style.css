@@ -162,6 +162,7 @@ header {
   width: 130px;
   height: 200px;
   cursor: pointer;
+  outline: none;
   z-index: 1;
 }
 
@@ -171,6 +172,8 @@ header {
   position: absolute;
   margin-top: -140px;
   background: radial-gradient(40% 40%, rgba(245, 227, 64, 0.06), rgba(245, 227, 64, 0));
+  -webkit-animation: flashes 0s infinite ease-in-out;
+          animation: flashes 0s infinite ease-in-out;
 }
 
 .lamp__container .lamp {
@@ -183,28 +186,40 @@ header {
   opacity: 0.6;
   -webkit-transition: width 0.5s, height 0.5s;
   transition: width 0.5s, height 0.5s;
-  -webkit-animation: lamp-flashes 0s infinite ease-in-out;
-          animation: lamp-flashes 0s infinite ease-in-out;
+  -webkit-animation: flashes 0s infinite ease-in-out;
+          animation: flashes 0s infinite ease-in-out;
 }
 
-@-webkit-keyframes lamp-flashes {
+@-webkit-keyframes flashesForLampText {
+  50% {
+    color: hsl(0, 0%, 23.5%);
+  }
+}
+
+@keyframes flashesForLampText {
+  50% {
+    color: hsl(0, 0%, 23.5%);
+  }
+}
+
+@-webkit-keyframes flashes {
   from {
     opacity: 0.6;
   }
   50% {
-    opacity: 0;
+    opacity: 0.1;
   }
   to {
     opacity: 0.6;
   }
 }
 
-@keyframes lamp-flashes {
+@keyframes flashes {
   from {
     opacity: 0.6;
   }
   50% {
-    opacity: 0;
+    opacity: 0.1;
   }
   to {
     opacity: 0.6;
@@ -233,8 +248,8 @@ header {
     height: 240px;
   }
   .lamp__container .lamp-collider {
-    width: 130px;
-    height: 200px;
+    width: 180px;
+    height: 250px;
   }
   .lamp__container .lamp-light {
     width: 500px;

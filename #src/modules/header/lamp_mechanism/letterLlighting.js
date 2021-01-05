@@ -1,54 +1,56 @@
 /*----------------------------ЛАМПОЧКА И ОСВЕЩЕНИЕ ТЕКСТА----------------------------*/
 //Параметры курсора
 var cursorLamp = {
-    xPosition: 0,
-    isJammed: false
+    xPosition: 0,           //Запоминаем позицию курсора
+    isJammed: false         //Зажата ли клавиша? 
 };
 
 //То, что имеет отношение к контейнеру с лампой 
 var lampMechanism = {
-    isFlashes: false,
-    lampRestrictionMovement: 2.5,
-    lampCollider: document.querySelector('.lampCollider_Js'),
-    lampContainer: document.querySelector('.lampContainer_Js'),
-    lampImage: document.querySelector('.lamp'),
-    lampSpeedFlashes: 0.8,
-    lampPowerLighting: 2
+    isFlashes: false,                                           //Должна ли лампа мигать?
+    lampRestrictionMovement: 2.5,                               //Граница движения лампы
+    lampCollider: document.querySelector('.lampCollider_Js'),   //Коллайдер лампы, активная область
+    lampContainer: document.querySelector('.lampContainer_Js'), //Контейнер с лампой, свечением и коллайдером
+    lampImage: document.querySelector('.lamp'),                 //Изображение лампы
+    lampLightingImage: document.querySelector('.lamp-light'),   //Контейнер со свечением от лампы
+    lampSpeedFlashes: 0.8,                                      //Скорость мерцания лампы
+    lampPowerLighting: 2                                        //Сила воздействия света на текст
 };
 
 //То, что имеет отношение к котейнеру с текстом
 var underLampText = {
-    sloganContainer: document.querySelector('.slogan'),
-    sloganLetters: document.querySelectorAll('.slogan span'),
-    hue: 39,
-    saturate: 30.8,
-    loverBoundSaturate: 6.1,
-    lightness: 55.1,
-    loverBoundLightness: 25.9
+    sloganContainer: document.querySelector('.slogan'),         //Контейнер со всем текстом
+    sloganLetters: document.querySelectorAll('.slogan span'),   //Массив символов
+    hue: 39,                                                    //Hue (Hsl)
+    saturate: 30.8,                                             //Satuarate(hSl)
+    loverBoundSaturate: 6.1,                                    //Минимальное значение Saturate
+    lightness: 55.1,                                            //Lighting(hsL)
+    loverBoundLightness: 25.9,                                  //Минимальное значение Lighting
+    isTextFlshes: false                                         //Должна ли подсвечиваемая область мигать?
 };
 
 //Объекты Window 
 window.onload = function(){
-    changeColorLetters(0);
+    changeColorLetters(0);   //В самом начале выстанавливаем лампу и свечение текста в стартовое положение
 }
 
 window.onresize= function(){
-    setTimeout(changeColorLetters, 300, 0);
+    setTimeout(changeColorLetters, 300, 0); //При изменение разрешения экрана, функции необходимо время, чтобы понять истинное значение ширины экрана
 }
 
 //-----------------------Двигатель лампы 
-function moveLampContainer(x, wSC){
+function moveLampContainer(x, wSC){         //Получает текущую координату курсора и текущую ширину контейнера со слоганом
     let lRM = lampMechanism.lampRestrictionMovement,
         lCont = lampMechanism.lampContainer,
         xStart = cursorLamp.xPosition;
     
-    let shift = xStart - x;
+    let shift = xStart - x;    //Вычисляем изменение курсора(зафиксированная позиция курсора - текущая позиция курсора)
 
     //Проверяем, достигла ли лампочка границ области
-    if ((shift > -wSC/lRM) && (shift < wSC/lRM)){
+    if ((shift > -wSC/lRM) && (shift < wSC/lRM)){    //Лампа вычисляетя ширина слогана/на коэффициент граиницы движения лампы
         lCont.style.right = shift + 'px';
 
-        if ((shift < -wSC/lRM * 0.8) || (shift > wSC/lRM * 0.8)){
+        if ((shift < -wSC/lRM * 0.8) || (shift > wSC/lRM * 0.8)){  //Область мигания лампы
             lampFlashes(true, lampMechanism.lampSpeedFlashes); //Лампа мигает 
         }
         else{ 
@@ -64,21 +66,26 @@ function moveLampContainer(x, wSC){
     changeColorLetters(shift);
 }
 
-//-----------------------Заставляем лампу мигать при приближении к границе
+//-----------------------Заставляем лампу и свечение мигать при приближении к границе
 function lampFlashes(boolFlashes, speedAnimation){
-    let lImg = lampMechanism.lampImage;
+    let lImg = lampMechanism.lampImage,
+        lLightImg = lampMechanism.lampLightingImage;
 
-    if (boolFlashes == false){
-        speedAnimation = 0;
+    if (boolFlashes == false){                  //Выключаем анимацию мерцания
+        speedAnimation = 0;                    
+        underLampText.isTextFlshes = false;    //Текст не мигает
+    }
+    else{                                      //Включаем анимацию мигания 
+        underLampText.isTextFlshes = true;    //Текст мигает
     }
 
-    lImg.style.animation = 'lamp-flashes ' + speedAnimation +'s infinite ease-in-out';
+    lImg.style.animation = 'flashes ' + speedAnimation +'s infinite ease-in-out';
+    lLightImg.style.animation = 'flashes ' + speedAnimation +'s infinite ease-in-out';
 } 
 
-//-----------------------Возвращаем лампу на место 
+//-----------------------Возвращаем контейнер с лампой, коллайдером и светом на место 
 function returnLampOnStart(obj){
     obj.style.right = 0 + 'px';
-    changeColorLetters(0);
 }
 
 //-----------------------Подсвечиваем текст в зависимости от положения текста
@@ -90,28 +97,50 @@ function changeColorLetters(shift){
         h = hue, s = saturate, l = lightness,
         borderS = underLampText.loverBoundSaturate, borderL = underLampText.loverBoundLightness,
         pL = lampMechanism.lampPowerLighting, coefficient = 0,
-        startPoint = 0;
+        startPoint = 0, isLampTextFlashes = true, speedTextAnim = lampMechanism.lampSpeedFlashes;
     
     coefficient = 100/fontSize * 0.8;
     startPoint = ((widthContainerLetters/nLet.length) * (nLet.length/2)) - shift;
     startPoint = parseInt(startPoint/nLet.length * coefficient);    
 
-    for (let i = startPoint; i >= 0; i--){
+    for (let i = startPoint; i >= 0; i--){    
         s = pL + s - (startPoint - i);
-        if (s < borderS) s = borderS;
+        if (s < borderS){
+            s = borderS;                    //Проверяем, достигло ли значение Saturate предельного значения
+            isLampTextFlashes = false;     
+        }
         l = pL + l - (startPoint - i);
-        if (l < borderL) l = borderL;
+        if (l < borderL){ 
+            l = borderL;                    //Проверяем, достигло ли значение Ligtness предельного значения
+            isLampTextFlashes = false;
+        }
+        if (isLampTextFlashes == false || underLampText.isTextFlshes == false){
+            speedTextAnim = 0;              //Выключим анимаию при условиях достижения одого из параметров границы или если лампа не достигла области мигания
+        }
+
         nLet[i].style.color = 'hsl(' + h + ', ' + s + '%, '+ l +'%)';
+        nLet[i].style.animation = 'flashesForLampText ' + speedTextAnim +'s infinite ease-in-out';
     }
 
    h = hue; s = saturate; l = lightness;
 
     for (let i = startPoint; i < nLet.length; i++){
+        isLampTextFlashes = true; speedTextAnim = lampMechanism.lampSpeedFlashes;
         s = pL + s + (startPoint - i);
-        if (s < borderS) s = borderS;
+        if (s < borderS){ 
+            s = borderS;
+            isLampTextFlashes = false;
+        }
         l = pL + l + (startPoint - i);
-        if (l < borderL) l = borderL;
+        if (l < borderL){ 
+            l = borderL;
+            isLampTextFlashes = false;
+        }
+        if (isLampTextFlashes == false || underLampText.isTextFlshes == false){
+            speedTextAnim = 0;
+        }
         nLet[i].style.color = 'hsl(' + h + ', ' + s + '%, '+ l +'%)';
+        nLet[i].style.animation = 'flashesForLampText ' + speedTextAnim +'s infinite ease-in-out';
     }
 }
 
@@ -127,10 +156,15 @@ lampMechanism.lampCollider.addEventListener("mousedown", function(){
     forLampMouseDown(); //Мышка
 });
 
+lampMechanism.lampCollider.addEventListener("touchstart", function(){ 
+    forLampMouseDown(); //Тачскрин
+});
+
 //-----------------------ЛКМ отжата 
 function forLampMouseUp(){
     event.preventDefault();
     cursorLamp.isJammed = false;
+    underLampText.isTextFlshes = false;
     lampFlashes(false);
     changeColorLetters(0);
     returnLampOnStart(lampMechanism.lampContainer);
@@ -138,6 +172,10 @@ function forLampMouseUp(){
 
 document.addEventListener("mouseup", function(){ 
     forLampMouseUp(); //Мышка
+});
+
+document.addEventListener("touchend", function(){ 
+    forLampMouseUp(); //Тачскрин
 });
 
 //-----------------------Курсор двигается с зажатой ЛКМ
@@ -149,5 +187,9 @@ function forLampMouseMove(){
 
 lampMechanism.lampCollider.addEventListener("mousemove", function(){ 
     forLampMouseMove(); //Мышка
+});
+
+lampMechanism.lampCollider.addEventListener("touchmove", function(){ 
+    forLampMouseMove(); //Тачскрин
 });
 
