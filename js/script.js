@@ -156,7 +156,7 @@ lampMechanism.lampCollider.addEventListener("mousedown", function(){
     forLampMouseDown(); //Мышка
 });
 
-lampMechanism.lampCollider.addEventListener("touchstart", function(){ 
+lampMechanism.lampCollider.addEventListener("ontouchstart", function(){ 
     forLampMouseDown(); //Тачскрин
 });
 
@@ -174,7 +174,7 @@ document.addEventListener("mouseup", function(){
     forLampMouseUp(); //Мышка
 });
 
-document.addEventListener("touchend", function(){ 
+document.addEventListener("ontouchend", function(){ 
     forLampMouseUp(); //Тачскрин
 });
 
@@ -189,7 +189,7 @@ lampMechanism.lampCollider.addEventListener("mousemove", function(){
     forLampMouseMove(); //Мышка
 });
 
-lampMechanism.lampCollider.addEventListener("touchmove", function(){ 
+lampMechanism.lampCollider.addEventListener("ontouchmove", function(){ 
     forLampMouseMove(); //Тачскрин
 });
 
