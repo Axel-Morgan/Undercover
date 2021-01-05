@@ -119,21 +119,20 @@ header {
   }
 }
 
-@media screen and (max-width: 500px) {
+@media screen and (max-width: 650px) {
   .names__container hr {
     top: 2px;
   }
   .names__container h1 {
-    font-size: 16.47145px;
+    font-size: 21.41288px;
   }
   .names__container p {
-    font-size: 9.15081px;
+    font-size: 11.89605px;
   }
 }
 
 .header__lamp-mechanism {
   width: 100%;
-  min-height: 350px;
   margin-top: 30px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
@@ -337,6 +336,7 @@ header {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  margin-top: 80px;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
@@ -353,7 +353,7 @@ header {
   width: 30px;
   height: 30px;
   position: absolute;
-  margin-top: 20px;
+  margin-top: 25px;
   border-width: 0px 2px 2px 0px;
   border-style: solid;
   border-color: hsl(0, 0%, 23.5%);
@@ -361,14 +361,28 @@ header {
           transform: rotate(45deg);
 }
 
-@media screen and (max-width: 650px) {
+@media screen and (max-width: 950px) {
   .header__scroll-name p {
-    font-size: 18px;
+    font-size: 15.30015px;
   }
   .header__scroll-name .arrow-down {
     width: 25px;
     height: 25px;
     margin-top: 20px;
+  }
+}
+
+@media screen and (max-width: 650px) {
+  .header__scroll-name {
+    margin-top: 60px;
+  }
+  .header__scroll-name p {
+    font-size: 10.46852px;
+  }
+  .header__scroll-name .arrow-down {
+    width: 15px;
+    height: 15px;
+    margin-top: 15px;
   }
 }
 
