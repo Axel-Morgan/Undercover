@@ -2,9 +2,8 @@
 .header__scroll-name{
     width: 100%;
     flex-direction: column;
-    margin-top: 80px;
     align-items: center;
-
+    margin-bottom: 50px;
     //Надпись Scroll down for more
     p{
         color: hslConv($darkGray);

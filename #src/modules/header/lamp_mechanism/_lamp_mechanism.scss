@@ -3,7 +3,6 @@ $startFont_span: 45;
 //ГЛАВНЫЙ КОНТЕЙНЕР 
 .header__lamp-mechanism{
     width: 100%;
-    margin-top: 30px;
     flex-direction: column;
     align-items: center;
 }
@@ -170,6 +169,10 @@ $startFont_span: 45;
 
 //ДО 700PX Ширины экрана
 @media screen and (max-width: 700px){
+    .header__lamp-mechanism{
+        margin-top: 15px;
+    }
+
     .slogan{
         //Отдельно взятый символ
         span{
