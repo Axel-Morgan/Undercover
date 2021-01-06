@@ -47,7 +47,7 @@ header {
 }
 
 @media screen and (orientation: landscape) {
-  height: 250vmax;
+  height: 200vh;
 }
 
 .header__name {
