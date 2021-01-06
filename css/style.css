@@ -46,6 +46,10 @@ header {
   overflow: hidden;
 }
 
+@media screen and (max-width: 500px) {
+  height: 100vmax;
+}
+
 .header__name {
   width: 100%;
   margin-top: 30px;

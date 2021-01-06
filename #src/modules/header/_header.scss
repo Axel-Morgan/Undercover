@@ -7,6 +7,10 @@ header{
     overflow: hidden;
 }
 
+@media screen and (max-width: 500px){
+    height: 100vmax;
+}
+
 //СТИЛИ ДЛЯ ШАПКИ HEADER
 @import 'header_title/_header_title';
 
