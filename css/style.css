@@ -362,15 +362,18 @@ header {
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
           flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
-  margin-bottom: 50px;
 }
 
 .header__scroll-name p {
   color: hsl(0, 0%, 23.5%);
   text-transform: uppercase;
+  margin-bottom: 20px;
   font-family: ub-light;
   font-size: 22px;
 }
@@ -399,9 +402,6 @@ header {
 }
 
 @media screen and (max-width: 650px) {
-  .header__scroll-name {
-    margin-top: 60px;
-  }
   .header__scroll-name p {
     font-size: 10.46852px;
   }
