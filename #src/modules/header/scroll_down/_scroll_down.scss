@@ -2,8 +2,8 @@
 .header__scroll-name{
     width: 100%;
     flex-direction: column;
+    justify-content: center;
     align-items: center;
-    margin-bottom: 50px;
     
     //Надпись Scroll down for more
     p{
@@ -17,8 +17,7 @@
     .arrow-down{
         width: 30px;
         height: 30px;
-        position: absolute;
-        margin-top: 25px;
+        position: relative;
         border-width: 0px 2px 2px 0px;
         border-style: solid;
         border-color: hslConv($darkGray);
@@ -36,7 +35,6 @@
         .arrow-down{
             width: 25px;
             height: 25px;
-            margin-top: 20px;
         }
     }
 }
@@ -44,8 +42,6 @@
 //ДО 650px ширины 
 @media screen and (max-width: 650px){
     .header__scroll-name{
-        margin-top: 60px;
-
         //Надпись Scroll down for more
         p{
             font-size:  calcSize(22, 650);
@@ -55,7 +51,6 @@
         .arrow-down{
             width: 15px;
             height: 15px;
-            margin-top: 15px;
         }
     }
 }

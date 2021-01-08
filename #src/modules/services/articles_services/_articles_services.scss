@@ -1,0 +1,147 @@
+$fontArtServP: 16;
+$sizeArtSercBackground: 500;
+
+//Основной блок со статьями раздела SERVICES
+.articles_services{
+    width: 60%;
+    flex-direction: column;
+    position: relative;
+}
+
+//Блок со статьей 
+.articles_services__item{
+    max-width: 45%;
+    display: none;
+
+    //Инициализация 1-ого блока
+    &:nth-child(1){
+        display: flex;
+    }
+
+    //Стилизация текста статьи
+    p{
+        min-height: 100px;
+        text-align: justify;
+        font-size: 16px;
+        font-family: ub-light;
+        color: $lightGray;
+    }
+
+    //Стилизация изображения на фоне статьи
+    .background_aricles_services{
+        position: absolute; 
+        width: 500px;
+        height: 500px;
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        bottom: 0px;
+        right: 250px;
+        opacity: 0.8;
+    }
+
+    //Стили для каждой отдельно взятой статьи
+    @for $i from 1 through 6 {
+        //Отступ статьи
+        &:nth-of-type(#{$i}) p{
+            margin-top: #{70 * ($i - 1)}px;
+        } 
+
+        //Задание блоку с задним фоном изображения
+        &:nth-of-type(#{$i}) .background_aricles_services{ 
+            background-image: url(../images/services/services_image_#{$i}.png);
+            //bottom: #{5 * ($i - 1)}px;
+        }
+   }
+}
+
+//ОТ 1600 PX
+@media screen and (min-width: 1600px){
+    .articles_services__item{
+        //Текс ссылки 
+        p{
+            font-size: calcSize($fontArtServP, 1600);
+        }
+
+        //Стилизация изображения на фоне статьи
+        .background_aricles_services{
+            width: calcSize($sizeArtSercBackground, 1600);
+            height: calcSize($sizeArtSercBackground, 1600);
+        }
+    }
+}
+
+//ОТ 1150 PX
+@media screen and (max-width: 1150px){
+    //Блок со статьей 
+    .articles_services__item{
+            max-width: 55%;
+    }
+    //Блок со статьей 
+    .articles_services__item{
+        //Текс ссылки 
+        p{
+            font-size: calcSize($fontArtServP, 1150);
+        }
+
+        .background_aricles_services{
+            width: calcSize($sizeArtSercBackground, 1150);
+            height: calcSize($sizeArtSercBackground, 1150);
+            right: 100px;
+        }
+    }
+}
+
+@media screen and (max-width: 840px){
+    //Блок со статьей 
+    .articles_services__item{
+        //Текс ссылки 
+        p{
+            font-size: calcSize($fontArtServP, 840);
+        }
+
+        .background_aricles_services{
+            width: calcSize($sizeArtSercBackground, 840);
+            height: calcSize($sizeArtSercBackground, 840);
+            right: 70px;
+        }
+    }
+}
+
+@media screen and (max-width: 650px){
+    //Блок со статьей 
+    .articles_services__item{
+        //Текс ссылки 
+        p{
+            font-size: calcSize($fontArtServP, 650);
+        }
+
+        .background_aricles_services{
+            width: calcSize($sizeArtSercBackground, 650);
+            height: calcSize($sizeArtSercBackground, 650);
+            right: 70px;
+        }
+    }
+}
+
+@media screen and (max-width: 480px){
+    .articles_services{
+        align-items: center;
+    }
+
+        //Блок со статьей 
+        .articles_services__item{
+            .background_aricles_services{
+                right: 0px;
+            }
+        }
+}
+
+@media screen and (max-width: 380px){
+    .articles_services__item{
+        .background_aricles_services{
+            width: calcSize($sizeArtSercBackground, 380);
+            height: calcSize($sizeArtSercBackground, 380);
+            top: 100px;
+        }
+    }
+}
