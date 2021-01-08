@@ -74,7 +74,7 @@ $sizeArtSercBackground: 500;
 @media screen and (max-width: 1150px){
     //Блок со статьей 
     .articles_services__item{
-            max-width: 55%;
+        max-width: 55%;
     }
     //Блок со статьей 
     .articles_services__item{
@@ -130,18 +130,13 @@ $sizeArtSercBackground: 500;
 
         //Блок со статьей 
         .articles_services__item{
+            max-width: 80%;
+
             .background_aricles_services{
-                right: 0px;
+                width: calcSize($sizeArtSercBackground, 480);
+                height: calcSize($sizeArtSercBackground, 480);
+                top: 100px;
+                right: 0;
             }
         }
-}
-
-@media screen and (max-width: 380px){
-    .articles_services__item{
-        .background_aricles_services{
-            width: calcSize($sizeArtSercBackground, 380);
-            height: calcSize($sizeArtSercBackground, 380);
-            top: 100px;
-        }
-    }
 }

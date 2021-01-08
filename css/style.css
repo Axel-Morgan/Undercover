@@ -568,12 +568,6 @@ section {
   }
 }
 
-@media screen and (max-width: 480px) {
-  .nav_services_item p {
-    font-size: 9.13616px;
-  }
-}
-
 .articles_services {
   width: 60%;
   -webkit-box-orient: vertical;
@@ -713,16 +707,14 @@ section {
         -ms-flex-align: center;
             align-items: center;
   }
-  .articles_services__item .background_aricles_services {
-    right: 0px;
+  .articles_services__item {
+    max-width: 80%;
   }
-}
-
-@media screen and (max-width: 380px) {
   .articles_services__item .background_aricles_services {
-    width: 139.09224px;
-    height: 139.09224px;
+    width: 175.69546px;
+    height: 175.69546px;
     top: 100px;
+    right: 0;
   }
 }
 
