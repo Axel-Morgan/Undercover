@@ -30,13 +30,7 @@ var underLampText = {
 };
 
 //Объекты Window 
-window.onload = function(){
-    changeColorLetters(0);   //В самом начале выстанавливаем лампу и свечение текста в стартовое положение
-}
-
-window.onresize= function(){
-    setTimeout(changeColorLetters, 300, 0); //При изменение разрешения экрана, функции необходимо время, чтобы понять истинное значение ширины экрана
-}
+//ONLOAD, ONRESIZE - эти объекты расположены в windowObject.js
 
 //-----------------------Двигатель лампы 
 function moveLampContainer(x, wSC){         //Получает текущую координату курсора и текущую ширину контейнера со слоганом
@@ -93,7 +87,7 @@ function changeColorLetters(shift){
     let nLet = underLampText.sloganLetters,
         hue = underLampText.hue, saturate = underLampText.saturate, lightness = underLampText.lightness
         widthContainerLetters = underLampText.sloganContainer.offsetWidth,
-        fontSize = parseInt(window.getComputedStyle(underLampText.sloganLetters[0], null).getPropertyValue('font-size'), 10),
+        fontSize = parseInt(getComputedStyle(underLampText.sloganLetters[0]).fontSize),
         h = hue, s = saturate, l = lightness,
         borderS = underLampText.loverBoundSaturate, borderL = underLampText.loverBoundLightness,
         pL = lampMechanism.lampPowerLighting, coefficient = 0,

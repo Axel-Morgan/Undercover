@@ -496,7 +496,6 @@ section {
 
 .nav_services_item {
   margin-bottom: 50px;
-  cursor: pointer;
 }
 
 .nav_services_item hr {
@@ -509,8 +508,10 @@ section {
   color: #a5a5a5;
   font-family: ub-light;
   text-transform: uppercase;
-  -webkit-transition: color 0.3s ease-out;
-  transition: color 0.3s ease-out;
+  cursor: pointer;
+  border-top: 1px solid rgba(0, 0, 0, 0);
+  -webkit-transition: color 0.3s ease-out, font-size 0.05s ease-out;
+  transition: color 0.3s ease-out, font-size 0.05s ease-out;
 }
 
 .nav_services_item p:hover {
@@ -607,48 +608,24 @@ section {
   opacity: 0.8;
 }
 
-.articles_services__item:nth-of-type(1) p {
-  margin-top: 0px;
-}
-
 .articles_services__item:nth-of-type(1) .background_aricles_services {
   background-image: url(../images/services/services_image_1.png);
-}
-
-.articles_services__item:nth-of-type(2) p {
-  margin-top: 70px;
 }
 
 .articles_services__item:nth-of-type(2) .background_aricles_services {
   background-image: url(../images/services/services_image_2.png);
 }
 
-.articles_services__item:nth-of-type(3) p {
-  margin-top: 140px;
-}
-
 .articles_services__item:nth-of-type(3) .background_aricles_services {
   background-image: url(../images/services/services_image_3.png);
-}
-
-.articles_services__item:nth-of-type(4) p {
-  margin-top: 210px;
 }
 
 .articles_services__item:nth-of-type(4) .background_aricles_services {
   background-image: url(../images/services/services_image_4.png);
 }
 
-.articles_services__item:nth-of-type(5) p {
-  margin-top: 280px;
-}
-
 .articles_services__item:nth-of-type(5) .background_aricles_services {
   background-image: url(../images/services/services_image_5.png);
-}
-
-.articles_services__item:nth-of-type(6) p {
-  margin-top: 350px;
 }
 
 .articles_services__item:nth-of-type(6) .background_aricles_services {

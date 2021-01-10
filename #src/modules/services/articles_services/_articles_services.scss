@@ -41,11 +41,6 @@ $sizeArtSercBackground: 500;
 
     //Стили для каждой отдельно взятой статьи
     @for $i from 1 through 6 {
-        //Отступ статьи
-        &:nth-of-type(#{$i}) p{
-            margin-top: #{70 * ($i - 1)}px;
-        } 
-
         //Задание блоку с задним фоном изображения
         &:nth-of-type(#{$i}) .background_aricles_services{ 
             background-image: url(../images/services/services_image_#{$i}.png);

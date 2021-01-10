@@ -1,3 +1,101 @@
+/*-------------------------------------ПРИ ПЕРВОМ СТАРТЕ ПРОГРАММЫ-------------------------------------*/
+window.onload = function(){
+    //Скрипты, необходимые для файла letterLlighting 
+    changeColorLetters(0);   //В самом начале выстанавливаем лампу и свечение текста в стартовое положение
+
+    //Скрипты, необходимые для файла showServicesArticle
+    InitializingNavServices()    
+}
+
+/*-------------------------------------ПРИ ИЗМЕНЕНИИ ОКНА БРАУЗЕРА-------------------------------------*/
+window.onresize= function(){
+    //Скрипты, необходимые для файла letterLlighting 
+    setTimeout(changeColorLetters, 300, 0); //При изменение разрешения экрана, функции необходимо время, чтобы понять истинное значение ширины экрана
+
+    //Скрипты, необходимые для файла showServicesArticle
+    InitializingNavServices();
+}
+/*----------------------------НАВИГАЦИОННЫЙ БЛОК РАЗДЕЛА SERVICES----------------------------*/
+var navigationServices = {
+    links: document.querySelectorAll('.nav_services_item > p'),
+    linksFontSize: parseInt(getComputedStyle(document.querySelector('.nav_services_item > p')).fontSize),
+    linksSelectHSL: 'hsl(39,30.8%,55.1%)',
+    linksDefaultHSL: 'hsl(0,0%,64.7%)',
+    linksFontSizeZoom: 1.2,
+    firstLink: 0,
+    lastLink: 0,
+    isPush: false,
+    lines: document.querySelectorAll('.nav_services_item > hr') 
+};
+
+//Объекты Window 
+//ONLOAD, ONRESIZE - эти объекты расположены в windowObject.js
+
+//ИНИЦИАЛИЗАЦИЯ ВЫДЕЛЕНИЙ ССЫЛОК
+function InitializingNavServices(){
+    let links = navigationServices.links,
+        firstLink = navigationServices.firstLink;
+    
+    navigationServices.isPush = false;
+
+    for (let i = 0; i < links.length; i++){
+        links[i].style.color = '';                  
+        links[i].style.borderColor = '';      
+        links[i].style.fontSize = '';
+    }
+
+    navigationServices.lastLink = 0;
+
+    navigationServices.linksFontSize = parseInt(getComputedStyle(links[firstLink + 1]).fontSize);
+
+    links[firstLink].style.color = navigationServices.linksSelectHSL;                  
+    links[firstLink].style.borderColor = navigationServices.linksSelectHSL; 
+    links[firstLink].style.fontSize = navigationServices.linksFontSize * navigationServices.linksFontSizeZoom + 'px';   
+   
+}
+
+//НАЖИМАЕМ ПО ССЫЛКЕ ИЗ РАЗДЕЛА SERVICES
+function toPushNavLink(val){
+    let lastLink = navigationServices.lastLink;
+        
+    navigationServices.isPush = true;
+
+    if (val != lastLink){
+        toSelectNavLink(val);
+        toDeleteSeclecting(lastLink);
+    } 
+
+    navigationServices.isPush = false;
+}
+
+//ВЫДЕЛЯЮ ВЫБРАННУЮ ССЫЛКУ (ТЕКСТ И ВВЕРХНЮЮ ГРАНИЦУ)
+function toSelectNavLink(val){
+    let links = navigationServices.links,
+        hsl = navigationServices.linksSelectHSL,
+        fSize = navigationServices.linksFontSize;
+        zoom = navigationServices.linksFontSizeZoom;
+
+    //Выделяем ссылку
+    links[val].style.color = hsl;                  //Меняем цвет
+    links[val].style.borderColor = hsl;            //Меняем цвет границы 
+
+    if (navigationServices.isPush == true) links[val].style.fontSize = fSize * zoom + 'px';     
+    else links[val].style.fontSize = fSize + 'px';            
+
+    navigationServices.lastLink = val;             //Теперь этот элемент записан в предыдущую выбранную ссылку
+    navigationServices.linksFontSize = fSize;
+}
+
+//УБИРАЮ ВЫДЕЛЕНИЕ С ПРЕДЫДЩУЩЕЙ ВЫБРАННОЙ ССЫЛКИ 
+function toDeleteSeclecting(lL){
+    let fSize = navigationServices.linksFontSize;
+        startHSL = navigationServices.linksDefaultHSL,
+        zoom = navigationServices.linksFontSizeZoom,
+        links = navigationServices.links;
+    links[lL].style.color = '';                  //Возвращаем дефолтный цвет
+    links[lL].style.borderColor = '';      //Возвращаем дефолтный цвет границы 
+    links[lL].style.fontSize = '';       //Возвращаем дефолтный шрифт текста 
+}
 /*----------------------------ЛАМПОЧКА И ОСВЕЩЕНИЕ ТЕКСТА----------------------------*/
 //Параметры курсора
 var cursorLamp = {
@@ -30,13 +128,7 @@ var underLampText = {
 };
 
 //Объекты Window 
-window.onload = function(){
-    changeColorLetters(0);   //В самом начале выстанавливаем лампу и свечение текста в стартовое положение
-}
-
-window.onresize= function(){
-    setTimeout(changeColorLetters, 300, 0); //При изменение разрешения экрана, функции необходимо время, чтобы понять истинное значение ширины экрана
-}
+//ONLOAD, ONRESIZE - эти объекты расположены в windowObject.js
 
 //-----------------------Двигатель лампы 
 function moveLampContainer(x, wSC){         //Получает текущую координату курсора и текущую ширину контейнера со слоганом
@@ -93,7 +185,7 @@ function changeColorLetters(shift){
     let nLet = underLampText.sloganLetters,
         hue = underLampText.hue, saturate = underLampText.saturate, lightness = underLampText.lightness
         widthContainerLetters = underLampText.sloganContainer.offsetWidth,
-        fontSize = parseInt(window.getComputedStyle(underLampText.sloganLetters[0], null).getPropertyValue('font-size'), 10),
+        fontSize = parseInt(getComputedStyle(underLampText.sloganLetters[0]).fontSize),
         h = hue, s = saturate, l = lightness,
         borderS = underLampText.loverBoundSaturate, borderL = underLampText.loverBoundLightness,
         pL = lampMechanism.lampPowerLighting, coefficient = 0,
