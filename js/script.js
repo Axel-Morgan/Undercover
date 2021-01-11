@@ -16,11 +16,15 @@ window.onresize= function(){
     InitializingNavServices();
 }
 /*----------------------------НАВИГАЦИОННЫЙ БЛОК РАЗДЕЛА SERVICES----------------------------*/
+
+//Все, что относится к навигационному блоку
 var navigationServices = {
     links: document.querySelectorAll('.nav_services_item > p'),
-    linksFontSize: parseInt(getComputedStyle(document.querySelector('.nav_services_item > p')).fontSize),
+    linksStartHeight: 492,
+    linkContainerHeight: document.querySelector('.navigation_services_container').offsetHeight,
+    linkContainerWidth: document.querySelector('.navigation_services').offsetWidth,
+    linksFontSize: parseInt(getComputedStyle(document.querySelector('.nav_services_item > p')).fontSize), 
     linksSelectHSL: 'hsl(39,30.8%,55.1%)',
-    linksDefaultHSL: 'hsl(0,0%,64.7%)',
     linksFontSizeZoom: 1.2,
     firstLink: 0,
     lastLink: 0,
@@ -28,30 +32,45 @@ var navigationServices = {
     lines: document.querySelectorAll('.nav_services_item > hr') 
 };
 
+//Все, что относится к статьям 
+var ariclesServices = {
+    articlesContainer: document.querySelectorAll('.articles_services__item'),
+    articlesTextContainer: document.querySelectorAll('.articles_services__item > p'),
+    articlesImages: document.querySelectorAll('.background_aricles_services')
+};
+
 //Объекты Window 
 //ONLOAD, ONRESIZE - эти объекты расположены в windowObject.js
 
-//ИНИЦИАЛИЗАЦИЯ ВЫДЕЛЕНИЙ ССЫЛОК
+//ИНИЦИАЛИЗАЦИЯ 
 function InitializingNavServices(){
     let links = navigationServices.links,
-        firstLink = navigationServices.firstLink;
+        lastLink = navigationServices.lastLink,
+        hr = navigationServices.lines;
+        index = 0;
     
     navigationServices.isPush = false;
+    navigationServices.linkContainerHeight = document.querySelector('.navigation_services_container').offsetHeight;
+    navigationServices.linkContainerWidth = document.querySelector('.navigation_services').offsetWidth;
 
     for (let i = 0; i < links.length; i++){
         links[i].style.color = '';                  
         links[i].style.borderColor = '';      
         links[i].style.fontSize = '';
+        hr[i].style.width = '';
     }
 
-    navigationServices.lastLink = 0;
+    if (lastLink == links.length - 1) index = lastLink - 1;
+    else index = lastLink + 1;
 
-    navigationServices.linksFontSize = parseInt(getComputedStyle(links[firstLink + 1]).fontSize);
+    navigationServices.linksFontSize = parseInt(getComputedStyle(links[index]).fontSize);
 
-    links[firstLink].style.color = navigationServices.linksSelectHSL;                  
-    links[firstLink].style.borderColor = navigationServices.linksSelectHSL; 
-    links[firstLink].style.fontSize = navigationServices.linksFontSize * navigationServices.linksFontSizeZoom + 'px';   
-   
+    links[lastLink].style.color = navigationServices.linksSelectHSL;                  
+    links[lastLink].style.borderColor = navigationServices.linksSelectHSL; 
+    links[lastLink].style.fontSize = navigationServices.linksFontSize * navigationServices.linksFontSizeZoom + 'px';   
+    hr[lastLink].style.width =  (navigationServices.linkContainerWidth - 10) + 'px';
+
+    setTimeout(toShowArticleServices, 300, lastLink, lastLink);
 }
 
 //НАЖИМАЕМ ПО ССЫЛКЕ ИЗ РАЗДЕЛА SERVICES
@@ -62,6 +81,8 @@ function toPushNavLink(val){
 
     if (val != lastLink){
         toSelectNavLink(val);
+        toShowArticleServices(val, lastLink);
+        toShowServicesHr(val, lastLink);
         toDeleteSeclecting(lastLink);
     } 
 
@@ -79,8 +100,10 @@ function toSelectNavLink(val){
     links[val].style.color = hsl;                  //Меняем цвет
     links[val].style.borderColor = hsl;            //Меняем цвет границы 
 
-    if (navigationServices.isPush == true) links[val].style.fontSize = fSize * zoom + 'px';     
-    else links[val].style.fontSize = fSize + 'px';            
+    if (navigationServices.isPush == true && window.innerWidth > 500) links[val].style.fontSize = fSize * zoom + 'px';     
+    else links[val].style.fontSize = fSize + 'px';     
+    
+    console.log(window.innerWidth);
 
     navigationServices.lastLink = val;             //Теперь этот элемент записан в предыдущую выбранную ссылку
     navigationServices.linksFontSize = fSize;
@@ -88,14 +111,45 @@ function toSelectNavLink(val){
 
 //УБИРАЮ ВЫДЕЛЕНИЕ С ПРЕДЫДЩУЩЕЙ ВЫБРАННОЙ ССЫЛКИ 
 function toDeleteSeclecting(lL){
-    let fSize = navigationServices.linksFontSize;
-        startHSL = navigationServices.linksDefaultHSL,
-        zoom = navigationServices.linksFontSizeZoom,
-        links = navigationServices.links;
+    let links = navigationServices.links;
+
     links[lL].style.color = '';                  //Возвращаем дефолтный цвет
     links[lL].style.borderColor = '';      //Возвращаем дефолтный цвет границы 
     links[lL].style.fontSize = '';       //Возвращаем дефолтный шрифт текста 
 }
+
+//ОТОБРАЖАЮ HR ЛИНИЮ ПОД ВЫДЕЛЕННОЙ ССЫЛКОЙ 
+function toShowServicesHr(val, lL){
+    let hr = navigationServices.lines,
+        width = navigationServices.linkContainerWidth;
+
+    hr[val].style.width = (width - 10) + 'px';
+    hr[lL].style.width = 0 + '%';
+}
+
+//ПОКАЗЫВАЮ НЕОБХОДИМУЮ СТАТЬЮ ИЗ РАЗДЕЛА SERVICES 
+function toShowArticleServices(val, lL){
+    let articles = ariclesServices.articlesContainer,
+        bImage = ariclesServices.articlesImages,
+        sSize = navigationServices.linksStartHeight,
+        ariclesText = ariclesServices.articlesTextContainer,
+        linksHeigh = navigationServices.linkContainerHeight,
+        textTopShift = 0, coefficient = 2.5, startHeightText = 31;
+
+    coefficient = coefficient * (linksHeigh/sSize);
+    textTopShift = val * startHeightText * coefficient;
+
+    console.log(linksHeigh + '----' + textTopShift + '-----' + coefficient);
+    ariclesText[val].style.top = textTopShift + 'px';
+    
+    articles[lL].style.display = 'none';
+    articles[val].style.display = 'flex';
+}
+
+//-----------------------EVENT LISTENER-----------------------
+window.addEventListener("orientationchange", function() {
+    InitializingNavServices();
+}, false);
 /*----------------------------ЛАМПОЧКА И ОСВЕЩЕНИЕ ТЕКСТА----------------------------*/
 //Параметры курсора
 var cursorLamp = {
