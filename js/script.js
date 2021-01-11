@@ -16,6 +16,9 @@ window.onresize= function(){
     InitializingNavServices();
 }
 /*----------------------------НАВИГАЦИОННЫЙ БЛОК РАЗДЕЛА SERVICES----------------------------*/
+var windowService = {
+    isBlockServices: true
+}
 
 //Все, что относится к навигационному блоку
 var navigationServices = {
@@ -67,7 +70,10 @@ function InitializingNavServices(){
 
     links[lastLink].style.color = navigationServices.linksSelectHSL;                  
     links[lastLink].style.borderColor = navigationServices.linksSelectHSL; 
-    links[lastLink].style.fontSize = navigationServices.linksFontSize * navigationServices.linksFontSizeZoom + 'px';   
+
+    if (window.innerWidth > 500) links[lastLink].style.fontSize = navigationServices.linksFontSize * navigationServices.linksFontSizeZoom + 'px'; 
+    else links[lastLink].style.fontSize = navigationServices.linksFontSize + 'px';  
+ 
     hr[lastLink].style.width =  (navigationServices.linkContainerWidth - 10) + 'px';
 
     setTimeout(toShowArticleServices, 300, lastLink, lastLink);
@@ -102,8 +108,6 @@ function toSelectNavLink(val){
 
     if (navigationServices.isPush == true && window.innerWidth > 500) links[val].style.fontSize = fSize * zoom + 'px';     
     else links[val].style.fontSize = fSize + 'px';     
-    
-    console.log(window.innerWidth);
 
     navigationServices.lastLink = val;             //Теперь этот элемент записан в предыдущую выбранную ссылку
     navigationServices.linksFontSize = fSize;
