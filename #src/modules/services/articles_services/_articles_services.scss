@@ -4,6 +4,7 @@ $sizeArtSercBackground: 500;
 //Основной блок со статьями раздела SERVICES
 .articles_services{
     width: 60%;
+    height: auto;
     flex-direction: column;
     position: relative;
 }
@@ -12,6 +13,7 @@ $sizeArtSercBackground: 500;
 .articles_services__item{
     max-width: 45%;
     display: none;
+    height: auto;
 
     //Инициализация 1-ого блока
     &:nth-child(1){
@@ -20,6 +22,7 @@ $sizeArtSercBackground: 500;
 
     //Стилизация текста статьи
     p{
+        position: relative;
         min-height: 100px;
         text-align: justify;
         font-size: 16px;
@@ -30,12 +33,13 @@ $sizeArtSercBackground: 500;
     //Стилизация изображения на фоне статьи
     .background_aricles_services{
         position: absolute; 
-        width: 500px;
-        height: 500px;
+        width: 600px;
+        height: 600px;
         background-size: 100% 100%;
         background-repeat: no-repeat;
         bottom: 0px;
         right: 250px;
+        z-index: -10;
         opacity: 0.8;
     }
 
@@ -90,9 +94,6 @@ $sizeArtSercBackground: 500;
     //Блок со статьей 
     .articles_services__item{
         //Текс ссылки 
-        p{
-            font-size: calcSize($fontArtServP, 840);
-        }
 
         .background_aricles_services{
             width: calcSize($sizeArtSercBackground, 840);
@@ -103,35 +104,32 @@ $sizeArtSercBackground: 500;
 }
 
 @media screen and (max-width: 650px){
+    .articles_services{
+        width: 100%;
+        flex-direction: column;
+        position: relative;
+    }
+    
     //Блок со статьей 
     .articles_services__item{
-        //Текс ссылки 
-        p{
-            font-size: calcSize($fontArtServP, 650);
-        }
+        max-width: 100%;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
 
+        //Стилизация текста статьи
+        p{
+            position: static;
+            width: 90%;
+        }
+    
+        //Стилизация изображения на фоне статьи
         .background_aricles_services{
             width: calcSize($sizeArtSercBackground, 650);
             height: calcSize($sizeArtSercBackground, 650);
-            right: 70px;
+            position: static;
+            bottom: 0px;
+            right: 0px
         }
     }
-}
-
-@media screen and (max-width: 480px){
-    .articles_services{
-        align-items: center;
-    }
-
-        //Блок со статьей 
-        .articles_services__item{
-            max-width: 80%;
-
-            .background_aricles_services{
-                width: calcSize($sizeArtSercBackground, 480);
-                height: calcSize($sizeArtSercBackground, 480);
-                top: 100px;
-                right: 0;
-            }
-        }
 }
