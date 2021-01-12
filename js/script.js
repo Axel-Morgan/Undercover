@@ -53,41 +53,39 @@ function InitializingNavServices(){
         lastLink = navigationServices.lastLink,
         articles = ariclesServices.articlesContainer,
         hr = navigationServices.lines, hrTop = 40;
-        index = 0;
-    
-    if (Math.abs(yourWindow.width -  window.outerWidth) > 20 || yourWindow.firstInit == true){
-        navigationServices.isPush = false;
-        navigationServices.linkContainerHeight = document.querySelector('.navigation_services_container').offsetHeight;
-        navigationServices.linkContainerWidth = document.querySelector('.navigation_services').offsetWidth;
 
-        hrTop = hrTop * navigationServices.linkContainerHeight/navigationServices.linksStartHeight;
-        
-        for (let i = 0; i < links.length; i++){
-            links[i].style.color = '';                  
-            links[i].style.borderColor = '';      
-            links[i].style.fontSize = '';
-            articles[i].style.display = 'none';
-            hr[i].style.width = '';
-            hr[i].style.top = hrTop + 'px';
-        }
-
-        if (lastLink == links.length - 1) index = lastLink - 1;
-        else index = lastLink + 1;
-        navigationServices.linksFontSize = parseInt(getComputedStyle(links[index]).fontSize);
-
-        links[lastLink].style.color = navigationServices.linksSelectHSL;                  
-        links[lastLink].style.borderColor = navigationServices.linksSelectHSL; 
-
-        if (window.innerWidth > 500) links[lastLink].style.fontSize = navigationServices.linksFontSize * navigationServices.linksFontSizeZoom + 'px'; 
-        else links[lastLink].style.fontSize = navigationServices.linksFontSize + 'px';  
-    
-        hr[lastLink].style.width = (navigationServices.linkContainerWidth - 10) + 'px';
-
-        setTimeout(toShowArticleServices, 300, lastLink, lastLink);
-
-        yourWindow.width = window.outerWidth;
-        yourWindow.firstInit = false;
+    if (Math.abs(yourWindow.width -  window.outerWidth) > 20 || yourWindow.firstInit){
+        for (let i = 0; i < links.length; i++) articles[i].style.display = 'none';
     }
+
+    navigationServices.isPush = false;
+    navigationServices.linkContainerHeight = document.querySelector('.navigation_services_container').offsetHeight;
+    navigationServices.linkContainerWidth = document.querySelector('.navigation_services').offsetWidth;
+
+    hrTop *=  navigationServices.linkContainerHeight/navigationServices.linksStartHeight;
+
+    for (let i = 0; i < links.length; i++){
+        links[i].style = '';
+        hr[i].style.width = '';
+        hr[i].style.top = hrTop + 'px';
+    }
+
+    let index = (lastLink == links.length - 1) ? (lastLink - 1) : (lastLink + 1);
+
+    navigationServices.linksFontSize = parseInt(getComputedStyle(links[index]).fontSize);
+
+    links[lastLink].style.color = navigationServices.linksSelectHSL;                  
+    links[lastLink].style.borderColor = navigationServices.linksSelectHSL; 
+
+    if (window.innerWidth > 500) links[lastLink].style.fontSize = navigationServices.linksFontSize * navigationServices.linksFontSizeZoom + 'px'; 
+    else links[lastLink].style.fontSize = navigationServices.linksFontSize + 'px';  
+
+    hr[lastLink].style.width = (navigationServices.linkContainerWidth - 10) + 'px';
+
+    setTimeout(toShowArticleServices, 300, lastLink, lastLink);
+
+    yourWindow.width = window.outerWidth;
+    yourWindow.firstInit = false;
 }
 
 //НАЖИМАЕМ ПО ССЫЛКЕ ИЗ РАЗДЕЛА SERVICES
@@ -111,7 +109,7 @@ function toPushNavLink(val){
 function toSelectNavLink(val){
     let links = navigationServices.links,
         hsl = navigationServices.linksSelectHSL,
-        fSize = navigationServices.linksFontSize;
+        fSize = navigationServices.linksFontSize,
         zoom = navigationServices.linksFontSizeZoom;
 
     //Выделяем ссылку
@@ -146,12 +144,11 @@ function toShowServicesHr(val, lL){
 //ПОКАЗЫВАЮ НЕОБХОДИМУЮ СТАТЬЮ ИЗ РАЗДЕЛА SERVICES 
 function toShowArticleServices(val, lL){
     let articles = ariclesServices.articlesContainer,
-        sSize = navigationServices.linksStartHeight,
         ariclesText = ariclesServices.articlesTextContainer,
-        linksHeigh = navigationServices.linkContainerHeight,
-        textTopShift = 0, coefficient = 2.5, startHeightText = 31;
+        textTopShift = 0, startHeightText = 31;
 
-    coefficient = coefficient * (linksHeigh/sSize);
+    let coefficient = 2.5 * (navigationServices.linkContainerHeight/ navigationServices.linksStartHeight);
+
     textTopShift = val * startHeightText * coefficient;
 
     ariclesText[val].style.top = textTopShift + 'px';
@@ -163,18 +160,10 @@ function toShowArticleServices(val, lL){
 //ДВИГАЮ ИЗОБРАЖЕНИЕ
 function toMoveImageServices(val){
     let bImg = ariclesServices.articlesImages,
-        verticalShift = 0,
-        hStart = navigationServices.linksStartHeight, hNow = navigationServices.linkContainerHeight;
+        coefficient = navigationServices.linksStartHeight/navigationServices.linkContainerHeight;
 
-    if (val < bImg.length/2){
-        verticalShift = val * 60 * (hStart/hNow);hNow
-    }
-    
-    else {
-        verticalShift = -(bImg.length - val) * 40 * hNow/hStart;
-    }
-    console.log(hStart/hNow);
-    console.log(verticalShift);
+    let verticalShift = (val < bImg.length/2) ? (val * 60 * coefficient) : (-(bImg.length - val) * 40 * coefficient);
+ 
     bImg[val].style.top = verticalShift + 'px';
 }
 
@@ -214,17 +203,18 @@ var underLampText = {
 
 //-----------------------Двигатель лампы 
 function moveLampContainer(x, wSC){         //Получает текущую координату курсора и текущую ширину контейнера со слоганом
-    let lRM = lampMechanism.lampRestrictionMovement,
+    let borderPoint = wSC/lampMechanism.lampRestrictionMovement,
         lCont = lampMechanism.lampContainer,
         xStart = cursorLamp.xPosition;
     
-    let shift = xStart - x;    //Вычисляем изменение курсора(зафиксированная позиция курсора - текущая позиция курсора)
+    let shift = xStart - x,    //Вычисляем изменение курсора(зафиксированная позиция курсора - текущая позиция курсора)
+        borderPointFlshes = borderPoint * 0.8;
 
     //Проверяем, достигла ли лампочка границ области
-    if ((shift > -wSC/lRM) && (shift < wSC/lRM)){    //Лампа вычисляетя ширина слогана/на коэффициент граиницы движения лампы
+    if ((shift > -borderPoint) && (shift < borderPoint)){    //Лампа вычисляетя ширина слогана/на коэффициент граиницы движения лампы
         lCont.style.right = shift + 'px';
 
-        if ((shift < -wSC/lRM * 0.8) || (shift > wSC/lRM * 0.8)){  //Область мигания лампы
+        if ((shift < -borderPointFlshes) || (shift > borderPointFlshes)){  //Область мигания лампы
             lampFlashes(true, lampMechanism.lampSpeedFlashes); //Лампа мигает 
         }
         else{ 
@@ -232,7 +222,7 @@ function moveLampContainer(x, wSC){         //Получает текущую к
         }
     }
     else{
-        lampFlashes(false, ); // Лампа не мигает
+        lampFlashes(false); // Лампа не мигает
         returnLampOnStart(lCont); //Возвращаем на место лампу
     }
 
@@ -245,7 +235,7 @@ function lampFlashes(boolFlashes, speedAnimation){
     let lImg = lampMechanism.lampImage,
         lLightImg = lampMechanism.lampLightingImage;
 
-    if (boolFlashes == false){                  //Выключаем анимацию мерцания
+    if (!boolFlashes){                  //Выключаем анимацию мерцания
         speedAnimation = 0;                    
         underLampText.isTextFlshes = false;    //Текст не мигает
     }
@@ -300,6 +290,7 @@ function changeColorLetters(shift){
 
     for (let i = startPoint; i < nLet.length; i++){
         isLampTextFlashes = true; speedTextAnim = lampMechanism.lampSpeedFlashes;
+
         s = pL + s + (startPoint - i);
         if (s < borderS){ 
             s = borderS;
@@ -310,7 +301,7 @@ function changeColorLetters(shift){
             l = borderL;
             isLampTextFlashes = false;
         }
-        if (isLampTextFlashes == false || underLampText.isTextFlshes == false){
+        if (!isLampTextFlashes || !underLampText.isTextFlshes){
             speedTextAnim = 0;
         }
         nLet[i].style.color = 'hsl(' + h + ', ' + s + '%, '+ l +'%)';
@@ -321,7 +312,7 @@ function changeColorLetters(shift){
 //-----------------------EVENT LISTENER-----------------------
 //-----------------------Зажата ЛКМ на коллайдере лампы
 function forLampMouseDown(device){
-    if(device == true)  cursorLamp.xPosition = event.clientX; 
+    if (device) cursorLamp.xPosition = event.clientX; 
     else cursorLamp.xPosition = event.changedTouches[0].clientX;
     cursorLamp.isJammed = true;
 }
@@ -353,19 +344,19 @@ document.addEventListener("touchend", function(){
     forLampMouseUp(); //Тачскрин
 });
 
-document.addEventListener("touchcancel", function(){ 
+lampMechanism.lampCollider.addEventListener("touchcancel", function(){ 
     forLampMouseUp(); //Тачскрин
 });
 
 //-----------------------Курсор двигается с зажатой ЛКМ
 lampMechanism.lampCollider.addEventListener("mousemove", function(){ 
-    if (cursorLamp.isJammed == true){
+    if (cursorLamp.isJammed){
         moveLampContainer(event.clientX, underLampText.sloganContainer.offsetWidth);
     }
 });
 
 lampMechanism.lampCollider.addEventListener("touchmove", function(){ 
-    if (cursorLamp.isJammed == true){ 
+    if (cursorLamp.isJammed){ 
         moveLampContainer(event.changedTouches[0].clientX, underLampText.sloganContainer.offsetWidth);
     }
 });

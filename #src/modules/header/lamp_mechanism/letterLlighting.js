@@ -34,17 +34,18 @@ var underLampText = {
 
 //-----------------------Двигатель лампы 
 function moveLampContainer(x, wSC){         //Получает текущую координату курсора и текущую ширину контейнера со слоганом
-    let lRM = lampMechanism.lampRestrictionMovement,
+    let borderPoint = wSC/lampMechanism.lampRestrictionMovement,
         lCont = lampMechanism.lampContainer,
         xStart = cursorLamp.xPosition;
     
-    let shift = xStart - x;    //Вычисляем изменение курсора(зафиксированная позиция курсора - текущая позиция курсора)
+    let shift = xStart - x,    //Вычисляем изменение курсора(зафиксированная позиция курсора - текущая позиция курсора)
+        borderPointFlshes = borderPoint * 0.8;
 
     //Проверяем, достигла ли лампочка границ области
-    if ((shift > -wSC/lRM) && (shift < wSC/lRM)){    //Лампа вычисляетя ширина слогана/на коэффициент граиницы движения лампы
+    if ((shift > -borderPoint) && (shift < borderPoint)){    //Лампа вычисляетя ширина слогана/на коэффициент граиницы движения лампы
         lCont.style.right = shift + 'px';
 
-        if ((shift < -wSC/lRM * 0.8) || (shift > wSC/lRM * 0.8)){  //Область мигания лампы
+        if ((shift < -borderPointFlshes) || (shift > borderPointFlshes)){  //Область мигания лампы
             lampFlashes(true, lampMechanism.lampSpeedFlashes); //Лампа мигает 
         }
         else{ 
@@ -52,7 +53,7 @@ function moveLampContainer(x, wSC){         //Получает текущую к
         }
     }
     else{
-        lampFlashes(false, ); // Лампа не мигает
+        lampFlashes(false); // Лампа не мигает
         returnLampOnStart(lCont); //Возвращаем на место лампу
     }
 
@@ -65,7 +66,7 @@ function lampFlashes(boolFlashes, speedAnimation){
     let lImg = lampMechanism.lampImage,
         lLightImg = lampMechanism.lampLightingImage;
 
-    if (boolFlashes == false){                  //Выключаем анимацию мерцания
+    if (!boolFlashes){                  //Выключаем анимацию мерцания
         speedAnimation = 0;                    
         underLampText.isTextFlshes = false;    //Текст не мигает
     }
@@ -120,6 +121,7 @@ function changeColorLetters(shift){
 
     for (let i = startPoint; i < nLet.length; i++){
         isLampTextFlashes = true; speedTextAnim = lampMechanism.lampSpeedFlashes;
+
         s = pL + s + (startPoint - i);
         if (s < borderS){ 
             s = borderS;
@@ -130,7 +132,7 @@ function changeColorLetters(shift){
             l = borderL;
             isLampTextFlashes = false;
         }
-        if (isLampTextFlashes == false || underLampText.isTextFlshes == false){
+        if (!isLampTextFlashes || !underLampText.isTextFlshes){
             speedTextAnim = 0;
         }
         nLet[i].style.color = 'hsl(' + h + ', ' + s + '%, '+ l +'%)';
@@ -141,7 +143,7 @@ function changeColorLetters(shift){
 //-----------------------EVENT LISTENER-----------------------
 //-----------------------Зажата ЛКМ на коллайдере лампы
 function forLampMouseDown(device){
-    if(device == true)  cursorLamp.xPosition = event.clientX; 
+    if (device) cursorLamp.xPosition = event.clientX; 
     else cursorLamp.xPosition = event.changedTouches[0].clientX;
     cursorLamp.isJammed = true;
 }
@@ -173,19 +175,19 @@ document.addEventListener("touchend", function(){
     forLampMouseUp(); //Тачскрин
 });
 
-document.addEventListener("touchcancel", function(){ 
+lampMechanism.lampCollider.addEventListener("touchcancel", function(){ 
     forLampMouseUp(); //Тачскрин
 });
 
 //-----------------------Курсор двигается с зажатой ЛКМ
 lampMechanism.lampCollider.addEventListener("mousemove", function(){ 
-    if (cursorLamp.isJammed == true){
+    if (cursorLamp.isJammed){
         moveLampContainer(event.clientX, underLampText.sloganContainer.offsetWidth);
     }
 });
 
 lampMechanism.lampCollider.addEventListener("touchmove", function(){ 
-    if (cursorLamp.isJammed == true){ 
+    if (cursorLamp.isJammed){ 
         moveLampContainer(event.changedTouches[0].clientX, underLampText.sloganContainer.offsetWidth);
     }
 });
