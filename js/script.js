@@ -57,6 +57,8 @@ function InitializingNavServices(){
     if (Math.abs(yourWindow.width -  window.outerWidth) > 20 || yourWindow.firstInit){
         for (let i = 0; i < links.length; i++) articles[i].style.display = 'none';
     
+        setTimeout(toShowArticleServices, 300, lastLink, lastLink);
+
         yourWindow.firstInit = false;
         yourWindow.width = window.outerWidth;
     }
@@ -84,8 +86,6 @@ function InitializingNavServices(){
     else links[lastLink].style.fontSize = navigationServices.linksFontSize + 'px';  
 
     hr[lastLink].style.width = (navigationServices.linkContainerWidth - 10) + 'px';
-
-    setTimeout(toShowArticleServices, 300, lastLink, lastLink);
 }
 
 //НАЖИМАЕМ ПО ССЫЛКЕ ИЗ РАЗДЕЛА SERVICES
