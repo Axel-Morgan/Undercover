@@ -16,10 +16,6 @@ window.onresize= function(){
     InitializingNavServices();
 }
 /*----------------------------НАВИГАЦИОННЫЙ БЛОК РАЗДЕЛА SERVICES----------------------------*/
-var windowService = {
-    isBlockServices: true
-}
-
 //Все, что относится к навигационному блоку
 var navigationServices = {
     links: document.querySelectorAll('.nav_services_item > p'),
@@ -49,18 +45,21 @@ var ariclesServices = {
 function InitializingNavServices(){
     let links = navigationServices.links,
         lastLink = navigationServices.lastLink,
-        hr = navigationServices.lines;
+        hr = navigationServices.lines, hrTop = 40;
         index = 0;
     
     navigationServices.isPush = false;
     navigationServices.linkContainerHeight = document.querySelector('.navigation_services_container').offsetHeight;
     navigationServices.linkContainerWidth = document.querySelector('.navigation_services').offsetWidth;
 
+    hrTop = hrTop * navigationServices.linkContainerHeight/navigationServices.linksStartHeight;
+    
     for (let i = 0; i < links.length; i++){
         links[i].style.color = '';                  
         links[i].style.borderColor = '';      
         links[i].style.fontSize = '';
         hr[i].style.width = '';
+        hr[i].style.top = hrTop + 'px';
     }
 
     if (lastLink == links.length - 1) index = lastLink - 1;
@@ -74,7 +73,7 @@ function InitializingNavServices(){
     if (window.innerWidth > 500) links[lastLink].style.fontSize = navigationServices.linksFontSize * navigationServices.linksFontSizeZoom + 'px'; 
     else links[lastLink].style.fontSize = navigationServices.linksFontSize + 'px';  
  
-    hr[lastLink].style.width =  (navigationServices.linkContainerWidth - 10) + 'px';
+    hr[lastLink].style.width = (navigationServices.linkContainerWidth - 10) + 'px';
 
     setTimeout(toShowArticleServices, 300, lastLink, lastLink);
 }
@@ -89,6 +88,7 @@ function toPushNavLink(val){
         toSelectNavLink(val);
         toShowArticleServices(val, lastLink);
         toShowServicesHr(val, lastLink);
+        toMoveImageServices(val);
         toDeleteSeclecting(lastLink);
     } 
 
@@ -134,7 +134,6 @@ function toShowServicesHr(val, lL){
 //ПОКАЗЫВАЮ НЕОБХОДИМУЮ СТАТЬЮ ИЗ РАЗДЕЛА SERVICES 
 function toShowArticleServices(val, lL){
     let articles = ariclesServices.articlesContainer,
-        bImage = ariclesServices.articlesImages,
         sSize = navigationServices.linksStartHeight,
         ariclesText = ariclesServices.articlesTextContainer,
         linksHeigh = navigationServices.linkContainerHeight,
@@ -143,17 +142,29 @@ function toShowArticleServices(val, lL){
     coefficient = coefficient * (linksHeigh/sSize);
     textTopShift = val * startHeightText * coefficient;
 
-    console.log(linksHeigh + '----' + textTopShift + '-----' + coefficient);
     ariclesText[val].style.top = textTopShift + 'px';
     
     articles[lL].style.display = 'none';
     articles[val].style.display = 'flex';
 }
 
-//-----------------------EVENT LISTENER-----------------------
-window.addEventListener("orientationchange", function() {
-    InitializingNavServices();
-}, false);
+function toMoveImageServices(val){
+    let bImg = ariclesServices.articlesImages,
+        verticalShift = 0,
+        hStart = navigationServices.linksStartHeight, hNow = navigationServices.linkContainerHeight;
+
+    if (val < bImg.length/2){
+        verticalShift = val * 60 * (hStart/hNow);hNow
+    }
+    
+    else {
+        verticalShift = -(bImg.length - val) * 40 * hNow/hStart;
+    }
+    console.log(hStart/hNow);
+    console.log(verticalShift);
+    bImg[val].style.top = verticalShift + 'px';
+}
+
 /*----------------------------ЛАМПОЧКА И ОСВЕЩЕНИЕ ТЕКСТА----------------------------*/
 //Параметры курсора
 var cursorLamp = {

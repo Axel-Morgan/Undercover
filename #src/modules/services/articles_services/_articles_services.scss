@@ -10,6 +10,7 @@ $sizeArtSercBackground: 500;
 
 //Блок со статьей 
 .articles_services__item{
+    position: relative;
     max-width: 45%;
     display: none;
 
@@ -34,8 +35,8 @@ $sizeArtSercBackground: 500;
         height: 500px;
         background-size: 100% 100%;
         background-repeat: no-repeat;
-        bottom: 0px;
-        right: 250px;
+        top: 0px;
+        left: 50px;
         z-index: -10;
         opacity: 0.8;
     }
