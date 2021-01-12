@@ -16,6 +16,11 @@ window.onresize= function(){
     InitializingNavServices();
 }
 /*----------------------------НАВИГАЦИОННЫЙ БЛОК РАЗДЕЛА SERVICES----------------------------*/
+//Экран 
+var yourWindow = {
+    width: window.screen.width
+}
+
 //Все, что относится к навигационному блоку
 var navigationServices = {
     links: document.querySelectorAll('.nav_services_item > p'),
@@ -49,34 +54,39 @@ function InitializingNavServices(){
         hr = navigationServices.lines, hrTop = 40;
         index = 0;
     
-    navigationServices.isPush = false;
-    navigationServices.linkContainerHeight = document.querySelector('.navigation_services_container').offsetHeight;
-    navigationServices.linkContainerWidth = document.querySelector('.navigation_services').offsetWidth;
+    if (Math.abs(yourWindow.width -  window.screen.width) > 50){
+        navigationServices.isPush = false;
+        navigationServices.linkContainerHeight = document.querySelector('.navigation_services_container').offsetHeight;
+        navigationServices.linkContainerWidth = document.querySelector('.navigation_services').offsetWidth;
 
-    hrTop = hrTop * navigationServices.linkContainerHeight/navigationServices.linksStartHeight;
+        hrTop = hrTop * navigationServices.linkContainerHeight/navigationServices.linksStartHeight;
+        
+        for (let i = 0; i < links.length; i++){
+            links[i].style.color = '';                  
+            links[i].style.borderColor = '';      
+            links[i].style.fontSize = '';
+            articles[i].style.display = 'none';
+            hr[i].style.width = '';
+            hr[i].style.top = hrTop + 'px';
+        }
+
+        if (lastLink == links.length - 1) index = lastLink - 1;
+        else index = lastLink + 1;
+        navigationServices.linksFontSize = parseInt(getComputedStyle(links[index]).fontSize);
+
+        links[lastLink].style.color = navigationServices.linksSelectHSL;                  
+        links[lastLink].style.borderColor = navigationServices.linksSelectHSL; 
+
+        if (window.innerWidth > 500) links[lastLink].style.fontSize = navigationServices.linksFontSize * navigationServices.linksFontSizeZoom + 'px'; 
+        else links[lastLink].style.fontSize = navigationServices.linksFontSize + 'px';  
     
-    for (let i = 0; i < links.length; i++){
-        links[i].style.color = '';                  
-        links[i].style.borderColor = '';      
-        links[i].style.fontSize = '';
-        articles[i].style.display = 'none';
-        hr[i].style.width = '';
-        hr[i].style.top = hrTop + 'px';
+        hr[lastLink].style.width = (navigationServices.linkContainerWidth - 10) + 'px';
+
+        setTimeout(toShowArticleServices, 300, lastLink, lastLink);
+
+        yourWindow.width = window.screen.width;
     }
-
-    if (lastLink == links.length - 1) index = lastLink - 1;
-    else index = lastLink + 1;
-    navigationServices.linksFontSize = parseInt(getComputedStyle(links[index]).fontSize);
-
-    links[lastLink].style.color = navigationServices.linksSelectHSL;                  
-    links[lastLink].style.borderColor = navigationServices.linksSelectHSL; 
-
-    if (window.innerWidth > 500) links[lastLink].style.fontSize = navigationServices.linksFontSize * navigationServices.linksFontSizeZoom + 'px'; 
-    else links[lastLink].style.fontSize = navigationServices.linksFontSize + 'px';  
- 
-    hr[lastLink].style.width = (navigationServices.linkContainerWidth - 10) + 'px';
-
-    setTimeout(toShowArticleServices, 300, lastLink, lastLink);
+    console.log(yourWindow.width);
 }
 
 //НАЖИМАЕМ ПО ССЫЛКЕ ИЗ РАЗДЕЛА SERVICES
