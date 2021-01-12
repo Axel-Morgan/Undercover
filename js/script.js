@@ -18,7 +18,8 @@ window.onresize= function(){
 /*----------------------------НАВИГАЦИОННЫЙ БЛОК РАЗДЕЛА SERVICES----------------------------*/
 //Экран 
 var yourWindow = {
-    width: window.outerWidth
+    width: window.outerWidth,
+    firstInit: true
 }
 
 //Все, что относится к навигационному блоку
@@ -54,7 +55,7 @@ function InitializingNavServices(){
         hr = navigationServices.lines, hrTop = 40;
         index = 0;
     
-    if (Math.abs(yourWindow.width -  window.outerWidth) > 20){
+    if (Math.abs(yourWindow.width -  window.outerWidth) > 20 || yourWindow.firstInit == true){
         navigationServices.isPush = false;
         navigationServices.linkContainerHeight = document.querySelector('.navigation_services_container').offsetHeight;
         navigationServices.linkContainerWidth = document.querySelector('.navigation_services').offsetWidth;
@@ -85,8 +86,8 @@ function InitializingNavServices(){
         setTimeout(toShowArticleServices, 300, lastLink, lastLink);
 
         yourWindow.width = window.outerWidth;
+        yourWindow.firstInit = false;
     }
-    console.log(yourWindow.width);
 }
 
 //НАЖИМАЕМ ПО ССЫЛКЕ ИЗ РАЗДЕЛА SERVICES
