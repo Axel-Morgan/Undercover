@@ -18,7 +18,7 @@ window.onresize= function(){
 /*----------------------------НАВИГАЦИОННЫЙ БЛОК РАЗДЕЛА SERVICES----------------------------*/
 //Экран 
 var yourWindow = {
-    width: window.screen.width
+    width: window.outerWidth
 }
 
 //Все, что относится к навигационному блоку
@@ -54,7 +54,7 @@ function InitializingNavServices(){
         hr = navigationServices.lines, hrTop = 40;
         index = 0;
     
-    if (Math.abs(yourWindow.width -  window.screen.width) > 50){
+    if (Math.abs(yourWindow.width -  window.outerWidth) > 20){
         navigationServices.isPush = false;
         navigationServices.linkContainerHeight = document.querySelector('.navigation_services_container').offsetHeight;
         navigationServices.linkContainerWidth = document.querySelector('.navigation_services').offsetWidth;
@@ -84,7 +84,7 @@ function InitializingNavServices(){
 
         setTimeout(toShowArticleServices, 300, lastLink, lastLink);
 
-        yourWindow.width = window.screen.width;
+        yourWindow.width = window.outerWidth;
     }
     console.log(yourWindow.width);
 }
