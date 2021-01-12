@@ -45,6 +45,7 @@ var ariclesServices = {
 function InitializingNavServices(){
     let links = navigationServices.links,
         lastLink = navigationServices.lastLink,
+        articles = ariclesServices.articlesContainer,
         hr = navigationServices.lines, hrTop = 40;
         index = 0;
     
@@ -58,13 +59,13 @@ function InitializingNavServices(){
         links[i].style.color = '';                  
         links[i].style.borderColor = '';      
         links[i].style.fontSize = '';
+        articles[i].style.display = 'none';
         hr[i].style.width = '';
         hr[i].style.top = hrTop + 'px';
     }
 
     if (lastLink == links.length - 1) index = lastLink - 1;
     else index = lastLink + 1;
-
     navigationServices.linksFontSize = parseInt(getComputedStyle(links[index]).fontSize);
 
     links[lastLink].style.color = navigationServices.linksSelectHSL;                  
@@ -148,6 +149,7 @@ function toShowArticleServices(val, lL){
     articles[val].style.display = 'flex';
 }
 
+//ДВИГАЮ ИЗОБРАЖЕНИЕ
 function toMoveImageServices(val){
     let bImg = ariclesServices.articlesImages,
         verticalShift = 0,
