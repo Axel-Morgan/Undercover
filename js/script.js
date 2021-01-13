@@ -4,7 +4,7 @@ window.onload = function(){
     changeColorLetters(0);   //В самом начале выстанавливаем лампу и свечение текста в стартовое положение
 
     //Скрипты, необходимые для файла showServicesArticle
-    InitializingNavServices()    
+    InitializingNavServices(); 
 }
 
 /*-------------------------------------ПРИ ИЗМЕНЕНИИ ОКНА БРАУЗЕРА-------------------------------------*/
@@ -31,7 +31,6 @@ var navigationServices = {
     linksFontSize: parseInt(getComputedStyle(document.querySelector('.nav_services_item > p')).fontSize), 
     linksSelectHSL: 'hsl(39,30.8%,55.1%)',
     linksFontSizeZoom: 1.2,
-    firstLink: 0,
     lastLink: 0,
     isPush: false,
     lines: document.querySelectorAll('.nav_services_item > hr') 
@@ -54,11 +53,16 @@ function InitializingNavServices(){
         articles = ariclesServices.articlesContainer,
         hr = navigationServices.lines, hrTop = 40;
 
+    function callFun(){
+        toShowArticleServices(lastLink, lastLink);
+        toMoveImageServices(lastLink);
+    }
+
     if (Math.abs(yourWindow.width -  window.outerWidth) > 20 || yourWindow.firstInit){
         for (let i = 0; i < links.length; i++) articles[i].style.display = 'none';
+        
+        setTimeout(callFun, 300);
     
-        setTimeout(toShowArticleServices, 300, lastLink, lastLink);
-
         yourWindow.firstInit = false;
         yourWindow.width = window.outerWidth;
     }
@@ -144,14 +148,13 @@ function toShowServicesHr(val, lL){
 //ПОКАЗЫВАЮ НЕОБХОДИМУЮ СТАТЬЮ ИЗ РАЗДЕЛА SERVICES 
 function toShowArticleServices(val, lL){
     let articles = ariclesServices.articlesContainer,
-        ariclesText = ariclesServices.articlesTextContainer,
         textTopShift = 0, startHeightText = 31;
 
     let coefficient = 2.5 * (navigationServices.linkContainerHeight/ navigationServices.linksStartHeight);
 
     textTopShift = val * startHeightText * coefficient;
 
-    ariclesText[val].style.top = textTopShift + 'px';
+    articles[val].style.top = textTopShift + 'px';
     
     articles[lL].style.display = 'none';
     articles[val].style.display = 'flex';
@@ -160,10 +163,10 @@ function toShowArticleServices(val, lL){
 //ДВИГАЮ ИЗОБРАЖЕНИЕ
 function toMoveImageServices(val){
     let bImg = ariclesServices.articlesImages,
-        coefficient = navigationServices.linksStartHeight/navigationServices.linkContainerHeight;
+        height = document.querySelectorAll('.background_aricles_services')[val].offsetHeight * 0.1;
 
-    let verticalShift = (val < bImg.length/2) ? (val * 60 * coefficient) : (-(bImg.length - val) * 40 * coefficient);
- 
+    let verticalShift = (val < bImg.length/2) ? height : -height * 7; //(navigationServices.linkContainerHeight/navigationServices.linksStartHeight));
+    console.log(height);
     bImg[val].style.top = verticalShift + 'px';
 }
 
