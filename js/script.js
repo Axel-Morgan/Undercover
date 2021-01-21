@@ -5,6 +5,9 @@ window.onload = function(){
 
     //Скрипты, необходимые для файла showServicesArticle
     InitializingNavServices(); 
+
+    //Скрипты, необходимые для файла portfolioControll
+    toInitializePortfolio();
 }
 
 /*-------------------------------------ПРИ ИЗМЕНЕНИИ ОКНА БРАУЗЕРА-------------------------------------*/
@@ -15,6 +18,213 @@ window.onresize= function(){
     //Скрипты, необходимые для файла showServicesArticle
     InitializingNavServices();
 }
+/*-------------------------------------БЛОК УПРАВЛЕНИЯ СЕКЦИЕЙ PORTFOLIO-------------------------------------*/
+//Все, что имеет отношение к списку категорий 
+var portfolioSelecting = {
+    selectingContainer: document.querySelector('.selecting_category__container'),
+    currentSelection: document.querySelector('.selecting_category__window > .text > p'),
+    selectingWindow: document.querySelector('.selecting_category__window'),
+    categories: document.querySelectorAll('.selecting_category__overflow > ul > li'),
+    isSelect: false
+};
+
+//Все что имеет отношение к статьям
+var portfolioArticles = {
+    maxShowArticles: 4,
+    collection: [],
+    articles: document.querySelectorAll('.articles_portfolio__item'),
+    tags: document.querySelectorAll('.articles_portfolio__item > .articles_portfolio__info > span')
+};
+
+//Все что относится к блоку управления статьями PREV и NEXT
+var portfolioControl = {
+    pageNumber: 1,
+    last: 1,
+    currently: portfolioArticles.maxShowArticles,
+    control: document.querySelectorAll('.control_portfolio > span')
+}
+
+//ИНИЦИАЛИЗАИЯ МОДУЛЕЙ PORTFOLIO
+function toInitializePortfolio(){
+    toUpdateControlPortfolio(portfolioControl.last, portfolioControl.currently);
+}
+
+//ОТКРЫВАЮ СПИСОК КАТЕГОРИЙ 
+function toOpenSelecting(isSelect){
+    let selCont = portfolioSelecting.selectingContainer;
+
+    selCont.style.height = (isSelect) ? '' : 'auto';
+    swithOpposite(isSelect);
+
+    function swithOpposite(isSelect){
+        portfolioSelecting.isSelect = (isSelect) ? false : true;
+    }
+}
+
+//ВЫДЕЛЯЮ СПИСОК КАТЕГОРИЙ ЗОЛОТИСТЫМ ЦВЕТОМ ПРИ НАВЕДЕНИИ 
+function toHoverSelecting(isSelect){
+    let color = 'hsl(39,30.8%,55.1%)',
+        selCont = portfolioSelecting.selectingContainer,
+        arrow = selCont.querySelector('.arrow_container > .arrow');
+    
+    if (!isSelect){
+        selCont.style.borderColor = color;
+        selCont.style.color = color;
+        arrow.style.borderColor = color;
+    }
+}
+
+//УБИРАЮ ВЫДЕЛЕНИЕ ПРИ НАВЕДЕНИИ
+function toDeleteHoverSelecting(){
+    let selCont = portfolioSelecting.selectingContainer,
+        arrow = selCont.querySelector('.arrow_container > .arrow');
+
+    selCont.style.borderColor = '';
+    selCont.style.color = '';
+    arrow.style.borderColor = '';
+}
+
+//ВЫБИРАЮ ССЫЛКУ  
+function toChooseCategory(val){
+   let  categories = portfolioSelecting.categories,
+        selectingName = portfolioSelecting.currentSelection,
+        nameCategory =  categories[val].innerHTML.toLowerCase();
+
+   selectingName.innerHTML = (val == categories.length - 1) ? 'All Categories' : nameCategory;
+
+   portfolioControl.pageNumber = 1;
+   portfolioControl.last = 1;
+   portfolioControl.currently = portfolioArticles.maxShowArticles;
+
+   toOpenSelecting(portfolioSelecting.isSelect); 
+   toAddCollectionPortfolio(nameCategory);
+}
+
+//HOVER ДЛЯ СТАТЕЙ
+
+//СОЗДАЕМ КОЛЛЕКЦИЮ СТАТЕЙ, КОТОРЫЕ НЕОБХОДИМО ПОКАЗАТЬ 
+function toAddCollectionPortfolio(name){
+    let tags = portfolioArticles.tags,
+        maxShow = portfolioArticles.maxShowArticles, maxArticles = 0;
+
+    portfolioArticles.collection = [];
+
+    if (name != 'delete filter'){
+        for (let i = 0; i < tags.length; i++)
+            if (tags[i].innerHTML == name) portfolioArticles.collection.push(i);
+
+        maxArticles = portfolioArticles.collection.length;
+        maxShow = (maxArticles > maxShow) ? maxShow : maxArticles;
+    }   
+
+    else {
+        for (let i = 0; i < tags.length; i++) portfolioArticles.collection = [];
+        maxArticles = tags.length;
+    }
+
+    toUpdateControlPortfolio(1, maxShow);
+}
+
+//ОБНОВЛЕНИЕ НОМЕРОВ ТЕКУЩИХ СТАТЕЙ
+function toUpdateControlPortfolio(last, currently){
+    let control = portfolioControl.control;
+
+    control[0].innerHTML = last;
+    control[2].innerHTML = currently;
+    control[4].innerHTML = (portfolioArticles.collection.length != 0) ? portfolioArticles.collection.length : portfolioArticles.tags.length;
+
+    toShowCollectionPortfolio(portfolioArticles.collection, last, currently);
+}
+
+//КЛИКАЕМ ПО PREV
+function toClickPrevPortfolio(){
+    let numberFullPages = toCountPagesPortfolio(true),
+        remainds = toCountPagesPortfolio(false);
+        maxShow = portfolioArticles.maxShowArticles;
+
+    if (portfolioControl.pageNumber > 1) {
+
+        if (portfolioControl.pageNumber != numberFullPages + 1){
+            portfolioControl.last -= maxShow;
+            portfolioControl.currently -= maxShow;
+        }
+        else if (remainds != 0){
+            portfolioControl.last -= maxShow;
+            portfolioControl.currently -= remainds;
+        }
+
+        portfolioControl.pageNumber--;
+        toUpdateControlPortfolio(portfolioControl.last, portfolioControl.currently);
+    }
+}
+
+//КЛИКАЕМ ПО NEXT
+function toClickNextPortfolio(){
+    let numberFullPages = toCountPagesPortfolio(true),
+        remainds = toCountPagesPortfolio(false),
+        maxShow = portfolioArticles.maxShowArticles;
+
+    if (portfolioControl.pageNumber <= numberFullPages) {
+        portfolioControl.pageNumber++;
+        
+        if (portfolioControl.pageNumber != numberFullPages + 1){
+            portfolioControl.last += maxShow;
+            portfolioControl.currently += maxShow;
+        }
+        else if (remainds != 0){
+            portfolioControl.last += maxShow;
+            portfolioControl.currently += remainds;
+        }
+
+        toUpdateControlPortfolio(portfolioControl.last, portfolioControl.currently);
+    }
+}
+
+//ПОЛУЧАЕМ КОЛ-ВО ПОЛНЫХ СТРАНИЦ ИЛИ КОЛ-ВО СТРАНИЦ В ОСТАТКЕ 
+function toCountPagesPortfolio(isFullPages){
+    let numberArticles = (portfolioArticles.collection.length != 0) ? portfolioArticles.collection.length : portfolioArticles.tags.length;
+    
+    if (isFullPages) return Math.floor(numberArticles/portfolioArticles.maxShowArticles);
+    else return numberArticles % portfolioArticles.maxShowArticles;
+}
+
+//ПОКАЗЫВАЕМ СТАТЬИ PORTFOLIO 
+function toShowCollectionPortfolio(collection, last, currently){
+    let articles = portfolioArticles.articles;
+
+    for (let i = 0; i < articles.length; i++) 
+        articles[i].style.display = 'none';
+    
+    if (collection != 0)
+        for (let i = last; i <= currently; i++)
+            articles[collection[i - 1]].style.display = 'flex';
+    
+    else
+        for (let i = last; i <= currently; i++) 
+            articles[i - 1].style.display = 'flex';
+}
+
+//Event Listener 
+portfolioControl.control[1].addEventListener("click", function(){
+    toClickPrevPortfolio(-1);
+});
+
+portfolioControl.control[3]. addEventListener("click", function(){
+    toClickNextPortfolio(1);
+});
+
+portfolioSelecting.selectingWindow.addEventListener("click", function(){ 
+    toDeleteHoverSelecting();
+    toOpenSelecting(portfolioSelecting.isSelect);
+});
+
+portfolioSelecting.selectingWindow.addEventListener("mouseover", function(){ 
+    toHoverSelecting(portfolioSelecting.isSelect);
+});
+
+portfolioSelecting.selectingWindow.addEventListener("mouseout", function(){ 
+    toDeleteHoverSelecting();
+});
 /*----------------------------НАВИГАЦИОННЫЙ БЛОК РАЗДЕЛА SERVICES----------------------------*/
 //Экран 
 var yourWindow = {
@@ -165,7 +375,7 @@ function toMoveImageServices(val){
     let bImg = ariclesServices.articlesImages,
         height = document.querySelectorAll('.background_aricles_services')[val].offsetHeight * 0.1;
 
-    let verticalShift = (val < bImg.length/2) ? height : -height * 7; //(navigationServices.linkContainerHeight/navigationServices.linksStartHeight));
+    let verticalShift = (val < bImg.length/2) ? height : -height * 7; 
     console.log(height);
     bImg[val].style.top = verticalShift + 'px';
 }

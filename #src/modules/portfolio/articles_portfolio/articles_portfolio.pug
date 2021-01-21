@@ -1,0 +1,12 @@
+include library_portfolio.pug
+
+.articles_portfolio__container
+    each val in block
+        .articles_portfolio__item
+            .articles_portfolio__hover
+                p see full project
+            .articles_portfolio__info
+                h2=val.name
+                hr
+                p=val.text
+                span=val.type
