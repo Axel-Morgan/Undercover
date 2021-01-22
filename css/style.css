@@ -972,6 +972,7 @@ section {
 }
 
 .articles_portfolio__item {
+  display: none;
   width: 40%;
   position: relative;
   min-height: 180px;
@@ -982,7 +983,7 @@ section {
   -webkit-box-pack: end;
       -ms-flex-pack: end;
           justify-content: flex-end;
-  background-color: #fff;
+  background-color: #222222;
   margin: 10px 10px;
   background-size: 100% 100%;
 }
@@ -996,122 +997,6 @@ section {
   display: -ms-flexbox;
   display: flex;
   z-index: 10;
-}
-
-.articles_portfolio__item:nth-of-type(1) {
-  background-image: url(../images/portfolio/portfolio_1.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(2) {
-  background-image: url(../images/portfolio/portfolio_2.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(3) {
-  background-image: url(../images/portfolio/portfolio_3.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(4) {
-  background-image: url(../images/portfolio/portfolio_4.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(5) {
-  background-image: url(../images/portfolio/portfolio_5.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(6) {
-  background-image: url(../images/portfolio/portfolio_6.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(7) {
-  background-image: url(../images/portfolio/portfolio_7.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(8) {
-  background-image: url(../images/portfolio/portfolio_8.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(9) {
-  background-image: url(../images/portfolio/portfolio_9.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(10) {
-  background-image: url(../images/portfolio/portfolio_10.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(11) {
-  background-image: url(../images/portfolio/portfolio_11.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(12) {
-  background-image: url(../images/portfolio/portfolio_12.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(13) {
-  background-image: url(../images/portfolio/portfolio_13.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(14) {
-  background-image: url(../images/portfolio/portfolio_14.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(15) {
-  background-image: url(../images/portfolio/portfolio_15.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(16) {
-  background-image: url(../images/portfolio/portfolio_16.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(17) {
-  background-image: url(../images/portfolio/portfolio_17.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(18) {
-  background-image: url(../images/portfolio/portfolio_18.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(19) {
-  background-image: url(../images/portfolio/portfolio_19.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(20) {
-  background-image: url(../images/portfolio/portfolio_20.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(21) {
-  background-image: url(../images/portfolio/portfolio_21.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(22) {
-  background-image: url(../images/portfolio/portfolio_22.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(23) {
-  background-image: url(../images/portfolio/portfolio_23.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(24) {
-  background-image: url(../images/portfolio/portfolio_24.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(25) {
-  background-image: url(../images/portfolio/portfolio_25.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(26) {
-  background-image: url(../images/portfolio/portfolio_26.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(27) {
-  background-image: url(../images/portfolio/portfolio_27.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(28) {
-  background-image: url(../images/portfolio/portfolio_28.jpg);
-}
-
-.articles_portfolio__item:nth-of-type(29) {
-  background-image: url(../images/portfolio/portfolio_29.jpg);
 }
 
 .articles_portfolio__hover {

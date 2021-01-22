@@ -9,12 +9,13 @@
 }
 
 .articles_portfolio__item{
+    display: none;
     width: 40%;
     position: relative;
     min-height: 180px;
     flex-direction: row;
     justify-content: flex-end;
-    background-color: #fff;
+    background-color: $bgColor;
     margin: 10px 10px;
     background-size: 100% 100%;
 
@@ -25,13 +26,6 @@
     &:hover > .articles_portfolio__hover{
         display: flex;
         z-index: 10;
-    }
-
-    @for $i from 1 through 29 {
-        //Задание блоку с задним фоном изображения
-        &:nth-of-type(#{$i}){ 
-            background-image: url(../images/portfolio/portfolio_#{$i}.jpg);
-        }
     }
 }
 
