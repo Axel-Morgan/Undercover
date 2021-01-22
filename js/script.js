@@ -198,13 +198,13 @@ function toShowCollectionPortfolio(collection, last, currently){
     if (collection != 0)
         for (let i = last; i <= currently; i++){
             articles[collection[i - 1]].style.display = 'flex';
-            articles[collection[i - 1]].style.backgroundImage = `url(../images/portfolio/portfolio_${collection[i - 1] + 1}.jpg)`;
+            articles[collection[i - 1]].style.backgroundImage = `url(images/portfolio/portfolio_${collection[i - 1] + 1}.jpg)`;
         }
     
     else
         for (let i = last; i <= currently; i++){
             articles[i - 1].style.display = 'flex';
-            articles[i - 1].style.backgroundImage = `url(../images/portfolio/portfolio_${i}.jpg)`;
+            articles[i - 1].style.backgroundImage = `url(images/portfolio/portfolio_${i}.jpg)`;
         }
 }
 
