@@ -458,7 +458,7 @@ header {
 aside {
   position: fixed;
   width: 90%;
-  top: 80px;
+  top: 40px;
   right: 5%;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
@@ -520,7 +520,7 @@ aside {
   }
 }
 
-@media screen and (max-height: 591px) {
+@media screen and (max-height: 570px) {
   aside {
     position: static;
     margin: 100px 0px;
@@ -590,7 +590,7 @@ aside {
   }
 }
 
-@media screen and (max-height: 591px) {
+@media screen and (max-height: 570px) {
   .menu__button-open {
     display: none;
   }
@@ -804,7 +804,7 @@ aside {
   }
 }
 
-@media screen and (max-height: 591px) {
+@media screen and (max-height: 570px) {
   .main-menu__container {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1050,7 +1050,7 @@ aside {
   }
 }
 
-@media screen and (max-height: 591px) {
+@media screen and (max-height: 570px) {
   .sign__container {
     right: 20%;
   }
