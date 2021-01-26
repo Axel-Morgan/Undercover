@@ -1,0 +1,19 @@
+- var firtsLinks = ['main', 'services', 'portfolio', 'feedbacks', 'contact us', 'footer'];
+- var secondLinks = ['sign in', 'sign up'];
+- var index = 0;
+
+.main-menu__container
+    .main-menu__header
+        h2 menu
+    .main-menu__links-container
+        .links
+            each val in firtsLinks
+                p=val
+        .links
+            each val in secondLinks
+                p=val
+    .main-menu__search 
+        .search 
+            input(type="text", placeholder="search") 
+            hr
+            .search-icon

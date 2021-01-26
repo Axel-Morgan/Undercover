@@ -1,0 +1,69 @@
+aside {
+    position: fixed;
+    width: 90%;
+    top: 80px;
+    right: 5%;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    z-index: 200;
+}
+
+.main-menu__header{
+    width: 100%;
+    min-height: 100px;
+    justify-content: center;
+
+    h2{
+        color: $lightGray;
+        text-transform: uppercase;
+        font-family: pd-bold;
+        font-size: 45px;
+    }
+}
+    
+
+$startFontSizeMenu: 45;
+
+@media screen and (min-width: 1600px){
+    .main-menu__header{
+        h2{
+            font-size: calcSize($startFontSizeMenu, 1600);
+        }
+    }
+}
+
+@media screen and (max-width: 800px){
+    .main-menu__header{
+        h2{
+            font-size: calcSize($startFontSizeMenu, 1000);
+        }
+    }
+}
+
+@media screen and (max-width: 750px){
+    aside {
+        width: 60%;
+        top: 20px;
+        right: 0;
+    }
+}
+
+@media screen and (max-width: 620px){
+    aside {
+        width: 80%;
+    }
+}
+
+@media screen and (max-width: 460px){
+    aside {
+        width: 90%;
+    }
+}
+
+//СТИЛИ ДЛЯ КНОПКИ ОТКРЫТЬ МЕНЮ/ЗАКРЫТЬ МЕНЮ
+@import 'button_open/_button_open';
+//СТИЛИ ДЛЯ ОСНОВНОГО МЕНЮ
+@import 'main_menu/_main_menu';
+//СТИЛИ ДЛЯ ОКНА РЕГИСТРАЦИИ И ВХОДА
+@import 'sign/_sign';

@@ -1,12 +1,12 @@
 /*----------------------------ЛАМПОЧКА И ОСВЕЩЕНИЕ ТЕКСТА----------------------------*/
 //Параметры курсора
-var cursorLamp = {
+const cursorLamp = {
     xPosition: 0,           //Запоминаем позицию курсора
     isJammed: false         //Зажата ли клавиша? 
 };
 
 //То, что имеет отношение к контейнеру с лампой 
-var lampMechanism = {
+const lampMechanism = {
     isFlashes: false,                                           //Должна ли лампа мигать?
     lampRestrictionMovement: 2.5,                               //Граница движения лампы
     lampCollider: document.querySelector('.lampCollider_Js'),   //Коллайдер лампы, активная область
@@ -18,7 +18,7 @@ var lampMechanism = {
 };
 
 //То, что имеет отношение к котейнеру с текстом
-var underLampText = {
+const underLampText = {
     sloganContainer: document.querySelector('.slogan'),         //Контейнер со всем текстом
     sloganLetters: document.querySelectorAll('.slogan span'),   //Массив символов
     hue: 39,                                                    //Hue (Hsl)
