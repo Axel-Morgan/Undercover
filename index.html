@@ -6,7 +6,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge"/>
     <title>Undercover</title>
     <link rel="stylesheet" href="css/style.css"/>
-    <script src="js/script.js" async="async"></script>
+    <script src="js/script.js" defer="defer"></script>
   </head>
   <body>
     <header>
@@ -433,5 +433,93 @@
       <!--РАЗДЕЛ СТРЕЛОЧНОЕ НАВИГАЦИОННОЕ УПРАВЛЕНИЕ PORTFOLIO -->
       <div class="control_portfolio"><span>1</span><span>prev</span><span>4</span><span>next</span><span>29</span></div>
     </section>
+    <aside>
+      <div class="menu__button-open">
+        <hr/>
+        <hr/>
+        <hr/>
+      </div>
+      <div class="main-menu__container">
+        <div class="main-menu__header">
+          <h2>menu</h2>
+        </div>
+        <div class="main-menu__links-container">
+          <div class="links">
+            <p>main</p>
+            <p>services</p>
+            <p>portfolio</p>
+            <p>feedbacks</p>
+            <p>contact us</p>
+            <p>footer</p>
+          </div>
+          <div class="links">
+            <p>sign in</p>
+            <p>sign up</p>
+          </div>
+        </div>
+        <div class="main-menu__search"> 
+          <div class="search"> 
+            <input type="text" placeholder="search"/>
+            <hr/>
+            <div class="search-icon"></div>
+          </div>
+        </div>
+      </div>
+      <div class="sign__container sign-in">
+        <div class="main-menu__header">
+          <h2>sign in</h2>
+        </div>
+        <div class="button-close__container" onclick="toCloseSign()">
+          <hr/>
+          <hr/>
+        </div>
+        <p>sign in using</p>
+        <div class="social-net__container"> <span>facebook</span><span>google+</span><span>twitter </span></div>
+        <p>or your account</p>
+        <div class="form">
+          <form method="post" action="#"> 
+            <div class="field">
+              <input type="text" placeholder="Name or Email" require="require"/>
+            </div>
+            <div class="field">
+              <input type="text" placeholder="Password" require="require"/>
+            </div>
+            <div class="submit"> 
+              <button type="submit">sign in</button>
+            </div>
+          </form>
+        </div>
+      </div>
+      <div class="sign__container sign-up">
+        <div class="main-menu__header">
+          <h2>sign up</h2>
+        </div>
+        <div class="button-close__container" onclick="toCloseSign()">
+          <hr/>
+          <hr/>
+        </div>
+        <p>sign up using</p>
+        <div class="social-net__container"> <span>facebook</span><span>google+</span><span>twitter </span></div>
+        <p>or enter following information </p>
+        <div class="form">
+          <form method="post" action="#"> 
+            <div class="field">
+              <input type="text" placeholder="Name" require="require"/>
+            </div>
+            <div class="field">
+              <input type="text" placeholder="Email" require="require"/>
+            </div>
+            <div class="container">
+              <div class="field">
+                <input type="text" placeholder="Password" require="require"/>
+              </div>
+              <div class="submit"> 
+                <button type="submit">sign up</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </aside>
   </body>
 </html>
