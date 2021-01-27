@@ -520,9 +520,10 @@ aside {
   }
 }
 
-@media screen and (max-height: 570px) {
+@media screen and (max-height: 550px) {
   aside {
     position: static;
+    right: 0px;
     margin: 100px 0px;
     width: 100%;
   }
@@ -590,7 +591,7 @@ aside {
   }
 }
 
-@media screen and (max-height: 570px) {
+@media screen and (max-height: 550px) {
   .menu__button-open {
     display: none;
   }
@@ -804,7 +805,7 @@ aside {
   }
 }
 
-@media screen and (max-height: 570px) {
+@media screen and (max-height: 550px) {
   .main-menu__container {
     display: -webkit-box;
     display: -ms-flexbox;
@@ -1050,8 +1051,9 @@ aside {
   }
 }
 
-@media screen and (max-height: 570px) {
+@media screen and (max-height: 550px) {
   .sign__container {
+    width: 60%;
     right: 20%;
   }
 }
@@ -1146,8 +1148,9 @@ aside {
 /*--------------------- ОБЩИЕ ЭЛЕМЕНТЫ--------------------*/
 /*--------------ОБЩИЕ ЭЛЕМЕНТЫ НА СТРАНИЦЕ-----------------------*/
 section {
+  height: auto;
   width: 100%;
-  margin-top: 100px;
+  margin: 150px 0px;
   -webkit-box-orient: vertical;
   -webkit-box-direction: normal;
       -ms-flex-direction: column;
