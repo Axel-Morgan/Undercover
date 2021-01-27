@@ -7,7 +7,7 @@
     justify-content: space-between;
     flex-direction: row;
     flex-wrap: wrap;
-    padding: 40px 80px 40px 40px;
+    padding: 40px 80px 20px 40px;
 }
 
 .main-menu__links-container{
@@ -183,6 +183,23 @@ $startMenuSearchSize: 22;
         p{
             margin: 5px 20px;
             font-size: 18px;
+        }
+    }
+}
+
+@media screen and (max-height: 550px){
+    .main-menu__container{
+        display: flex;
+        width: 100%;
+        min-height: 80vh;
+        border: none;
+        padding: 0px;
+        justify-content: center;
+    }
+
+    .links{
+        p{
+            min-height: 40px;
         }
     }
 }

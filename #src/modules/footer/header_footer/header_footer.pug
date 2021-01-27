@@ -1,0 +1,13 @@
+- var text = "this is the place where sparkles of idea turns into fire";
+- var simbols = text.split('');
+- var whitespace = '#160;';
+
+.footer-slogan__container 
+    each val in simbols
+            if(val != ' ')
+                span= val
+            else
+                span &#{whitespace}
+                |
+                |
+    

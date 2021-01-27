@@ -1,0 +1,39 @@
+.fire{
+    width: 70%;
+    height: 500px;
+    background-image: url('../images/footer/fire.png');
+    background-repeat: no-repeat;
+    background-size: 100% 100%;
+}
+
+@media screen and (max-width: 1000px){
+    .fire{
+        width: 90%;
+        height: 500px;
+    }
+}
+
+@media screen and (max-width: 800px){
+    .fire{
+        height: 400px;
+    }
+}
+
+@media screen and (max-width: 600px){
+    .fire{
+        width: 100%;
+        height: 400px;
+    }
+}
+
+@media screen and (max-width: 450px){
+    .fire{
+        height: 300px;
+    }
+}
+
+@media screen and (max-width: 350px){
+    .fire{
+        height: 250px;
+    }
+}

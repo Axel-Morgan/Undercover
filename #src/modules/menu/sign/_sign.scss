@@ -230,4 +230,18 @@ $startHeightFieldSign: 50;
     }
 }
 
+@media screen and (max-height: 550px){
+    .sign__container{
+        width: 60%;
+        right: 20%;
+    }
+}
+
+@media screen and (max-height: 550px) and (max-width: 750px){
+    .sign__container{
+        width: 90%;
+        right: 5%;
+    }
+}
+
 @import 'social_net/_social_net';

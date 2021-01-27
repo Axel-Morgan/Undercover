@@ -1,13 +1,16 @@
 /*-------------------------------------ПРИ ПЕРВОМ СТАРТЕ ПРОГРАММЫ-------------------------------------*/
 window.onload = function(){
-    //Скрипты, необходимые для файла letterLlighting 
+    //Инициализируем механизм освещения в Header
     changeColorLetters(0);   //В самом начале выстанавливаем лампу и свечение текста в стартовое положение
 
-    //Скрипты, необходимые для файла showServicesArticle
+    //Инициализируем Services
     InitializingNavServices(); 
 
-    //Скрипты, необходимые для файла portfolioControll
+    //Инициализируем портфолио
     toInitializePortfolio();
+
+    //Подсвечиваем footer
+    lightingSloganFooter();
 }
 
 /*-------------------------------------ПРИ ИЗМЕНЕНИИ ОКНА БРАУЗЕРА-------------------------------------*/
@@ -28,6 +31,7 @@ const menuButtons = {
 //Все, что имеет отношение к ведущему меню
 const mainMenu = {
     header: document.querySelector('header'),
+    footer: document.querySelector('footer'),
     sections: document.querySelectorAll('section'),
     menuContainer: document.querySelector('.main-menu__container'),
     links: document.querySelector('.main-menu__links-container'),
@@ -44,6 +48,7 @@ const signUp = {
     signUpContainer: document.querySelector('.sign-up'),
 };
 
+//ПЕРЕХОД ПО ССЫЛКАМ
 function controlUnitMenu(val){
     let link = val.innerHTML;
 
@@ -100,9 +105,13 @@ function toMoveToThereFromMain(val){
     }
 
     else if (val == 0){
-        let header = mainMenu.header;
+        mainMenu.header.scrollIntoView(true);
+        toShowMenu(true);
+        toCloseSign()
+    }
 
-        header.scrollIntoView(true);
+    else if (val == 5){
+        mainMenu.footer.scrollIntoView(true);
         toShowMenu(true);
         toCloseSign()
     }
@@ -673,3 +682,37 @@ lampMechanism.lampCollider.addEventListener("touchmove", function(){
     }
 });
 
+
+/*----------------------------ПОДСВЕТКА СЛОГАНА FOOTER----------------------------*/
+
+//-----------------------Подсвечиваем текст в зависимости от положения текста
+function lightingSloganFooter(){
+    let sloganLettersLength = document.querySelectorAll('.footer-slogan__container span'),
+        hue = 39, saturate = 30.8, lightness = 55.1,
+        h = hue, s = saturate, l = lightness, startPoint = 0;
+        borderS = 6.1, borderL = 25.9;
+    
+    startPoint = sloganLettersLength.length/2;
+
+    for (let i = startPoint; i >= 0; i--){  
+          
+        s -= (startPoint - i) * 0.1;
+        if (s < borderS) s = borderS;             
+        l -= (startPoint - i) * 0.1;
+        if (l < borderL) l = borderL;                  
+
+        sloganLettersLength[i].style.color = 'hsl(' + h + ', ' + s + '%, '+ l +'%)';
+    }
+
+   h = hue; s = saturate; l = lightness;
+
+    for (let i = startPoint; i < sloganLettersLength.length; i++){
+        s += (startPoint - i) * 0.1;
+        if (s < borderS) s = borderS;
+
+        l += (startPoint - i) * 0.1;
+        if (l < borderL) l = borderL;
+
+        sloganLettersLength[i].style.color = 'hsl(' + h + ', ' + s + '%, '+ l +'%)';
+    }
+}

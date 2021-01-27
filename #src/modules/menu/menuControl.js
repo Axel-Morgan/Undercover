@@ -8,6 +8,7 @@ const menuButtons = {
 //Все, что имеет отношение к ведущему меню
 const mainMenu = {
     header: document.querySelector('header'),
+    footer: document.querySelector('footer'),
     sections: document.querySelectorAll('section'),
     menuContainer: document.querySelector('.main-menu__container'),
     links: document.querySelector('.main-menu__links-container'),
@@ -24,6 +25,7 @@ const signUp = {
     signUpContainer: document.querySelector('.sign-up'),
 };
 
+//ПЕРЕХОД ПО ССЫЛКАМ
 function controlUnitMenu(val){
     let link = val.innerHTML;
 
@@ -80,9 +82,13 @@ function toMoveToThereFromMain(val){
     }
 
     else if (val == 0){
-        let header = mainMenu.header;
+        mainMenu.header.scrollIntoView(true);
+        toShowMenu(true);
+        toCloseSign()
+    }
 
-        header.scrollIntoView(true);
+    else if (val == 5){
+        mainMenu.footer.scrollIntoView(true);
         toShowMenu(true);
         toCloseSign()
     }

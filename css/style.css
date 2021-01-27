@@ -1971,6 +1971,134 @@ section {
   }
 }
 
+/*--------------------------ПОДВАЛ------------------------*/
+footer {
+  width: 100%;
+  height: auto;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  margin-top: 500px;
+}
+
+.footer-slogan__container {
+  width: 100%;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.footer-slogan__container span {
+  color: hsl(39, 35.1%, 55.9%);
+  font-family: ub-light;
+  font-size: 36px;
+  text-transform: uppercase;
+  -webkit-transition: 0.3s ease-out;
+  transition: 0.3s ease-out;
+}
+
+@media screen and (min-width: 1600px) {
+  .footer-slogan__container span {
+    font-size: 42.16691px;
+  }
+}
+
+@media screen and (max-width: 1200px) {
+  .footer-slogan__container span {
+    font-size: 31.62518px;
+  }
+}
+
+@media screen and (max-width: 950px) {
+  .footer-slogan__container span {
+    font-size: 25.0366px;
+  }
+}
+
+@media screen and (max-width: 840px) {
+  .footer-slogan__container span {
+    font-size: 22.13763px;
+  }
+}
+
+@media screen and (max-width: 700px) {
+  .footer-slogan__container span {
+    font-size: 18.44802px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .footer-slogan__container span {
+    font-size: 15.81259px;
+  }
+}
+
+@media screen and (max-width: 500px) {
+  .footer-slogan__container span {
+    font-size: 13.17716px;
+  }
+}
+
+@media screen and (max-width: 400px) {
+  .footer-slogan__container span {
+    font-size: 10.54173px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .footer-slogan__container span {
+    font-size: 9.22401px;
+  }
+}
+
+.fire {
+  width: 70%;
+  height: 500px;
+  background-image: url("../images/footer/fire.png");
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+}
+
+@media screen and (max-width: 1000px) {
+  .fire {
+    width: 90%;
+    height: 500px;
+  }
+}
+
+@media screen and (max-width: 800px) {
+  .fire {
+    height: 400px;
+  }
+}
+
+@media screen and (max-width: 600px) {
+  .fire {
+    width: 100%;
+    height: 400px;
+  }
+}
+
+@media screen and (max-width: 450px) {
+  .fire {
+    height: 300px;
+  }
+}
+
+@media screen and (max-width: 350px) {
+  .fire {
+    height: 250px;
+  }
+}
+
 /*-------------------------ШРИФТЫ-------------------------*/
 @font-face {
   font-family: 'pd-black-italic';

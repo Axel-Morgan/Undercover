@@ -1,0 +1,94 @@
+.footer-slogan__container {
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+
+    span{
+        color: hslConv($lightGold);
+        font-family: ub-light;
+        font-size: 36px;
+        text-transform: uppercase;
+        transition: 0.3s ease-out;
+    }
+}
+
+$startFont_span: 36;
+
+@media screen and (min-width: 1600px){
+    .footer-slogan__container {
+        span{
+            font-size: calcSize($startFont_span, 1600);
+        }
+    }
+}
+
+//ДО 1200PX Ширины экрана
+@media screen and (max-width: 1200px){
+    .footer-slogan__container {
+        span{
+            font-size: calcSize($startFont_span, 1200);
+        }
+    }
+}
+
+//ДО 950PX Ширины экрана
+@media screen and (max-width: 950px){
+    .footer-slogan__container {
+        span{
+            font-size: calcSize($startFont_span, 950);
+        }
+    }
+}
+
+//ДО 840PX Ширины экрана
+@media screen and (max-width: 840px){
+    .footer-slogan__container {
+        span{
+            font-size: calcSize($startFont_span, 840);
+        }
+    }
+}
+
+//ДО 700PX Ширины экрана
+@media screen and (max-width: 700px){
+    .footer-slogan__container {
+        span{
+            font-size: calcSize($startFont_span, 700);
+        }
+    }
+}
+
+//ДО 600PX Ширины экрана
+@media screen and (max-width: 600px){
+    .footer-slogan__container {
+        span{
+            font-size: calcSize($startFont_span, 600);
+        }
+    }
+}
+
+//ДО 500PX Ширины экрана
+@media screen and (max-width: 500px){
+    .footer-slogan__container {
+        span{
+            font-size: calcSize($startFont_span, 500);
+        }
+    }
+}
+
+//ДО 500PX Ширины экрана
+@media screen and (max-width: 400px){
+    .footer-slogan__container {
+        span{
+            font-size: calcSize($startFont_span, 400);
+        }
+    }
+}
+
+@media screen and (max-width: 350px){
+    .footer-slogan__container {
+        span{
+            font-size: calcSize($startFont_span, 350);
+        }
+    }
+}

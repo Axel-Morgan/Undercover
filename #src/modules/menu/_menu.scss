@@ -1,7 +1,7 @@
 aside {
     position: fixed;
     width: 90%;
-    top: 80px;
+    top: 40px;
     right: 5%;
     flex-direction: row;
     justify-content: center;
@@ -60,6 +60,16 @@ $startFontSizeMenu: 45;
         width: 90%;
     }
 }
+
+@media screen and (max-height: 550px){
+    aside {
+        position: static;
+        right: 0px;
+        margin: 100px 0px;
+        width: 100%;
+    }
+}
+
 
 //СТИЛИ ДЛЯ КНОПКИ ОТКРЫТЬ МЕНЮ/ЗАКРЫТЬ МЕНЮ
 @import 'button_open/_button_open';
