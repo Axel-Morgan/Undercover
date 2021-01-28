@@ -30,6 +30,10 @@ body {
   background-color: hsl(0, 0%, 13.4%);
 }
 
+.ie_container {
+  display: none;
+}
+
 input::-webkit-input-placeholder {
   opacity: 1;
   -webkit-transition: opacity 0.3s ease;
@@ -76,6 +80,55 @@ input:focus:-ms-input-placeholder {
   opacity: 0;
   -webkit-transition: opacity 0.3s ease;
   transition: opacity 0.3s ease;
+}
+
+::-webkit-scrollbar {
+  width: 3px;
+  height: 3px;
+}
+
+::-webkit-scrollbar-button {
+  background-color: #222222;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #b09769;
+}
+
+::-webkit-scrollbar-track-piece {
+  background-color: #222222;
+}
+
+::-webkit-scrollbar-thumb {
+  height: 50px;
+  background-color: #b09769;
+  border-radius: 10px;
+}
+
+@media screen and (-ms-high-contrast: active), (-ms-high-contrast: none) {
+  header, section, footer, aside {
+    display: none;
+  }
+  .ie_container {
+    display: block;
+    min-width: 100%;
+    font-family: ub-light;
+    text-transform: uppercase;
+    margin-top: 250px;
+  }
+  .ie_container h2 {
+    display: block;
+    text-align: center;
+    color: #b09769;
+    font-size: 48px;
+  }
+  .ie_container p {
+    margin-top: 20px;
+    display: block;
+    text-align: center;
+    color: #a5a5a5;
+    font-size: 26px;
+  }
 }
 
 /*--------------------------ШАПКА-------------------------*/
@@ -520,15 +573,6 @@ aside {
   }
 }
 
-@media screen and (max-height: 550px) {
-  aside {
-    position: static;
-    right: 0px;
-    margin: 100px 0px;
-    width: 100%;
-  }
-}
-
 .menu__button-open {
   position: absolute;
   top: 0;
@@ -591,16 +635,10 @@ aside {
   }
 }
 
-@media screen and (max-height: 550px) {
-  .menu__button-open {
-    display: none;
-  }
-}
-
 .main-menu__container {
   display: none;
   width: 100%;
-  min-height: 80vh;
+  max-height: 85vh;
   background-color: #222222;
   border: 1px solid #3c3c3c;
   -webkit-box-pack: justify;
@@ -719,9 +757,6 @@ aside {
 }
 
 @media screen and (max-width: 1050px) {
-  .main-menu__container {
-    min-height: auto;
-  }
   .links p {
     font-size: 18.08199px;
   }
@@ -739,7 +774,7 @@ aside {
 
 @media screen and (max-width: 750px) {
   .main-menu__container {
-    min-height: 95vh;
+    max-height: 95vh;
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
@@ -750,6 +785,8 @@ aside {
     -webkit-box-direction: normal;
         -ms-flex-direction: column;
             flex-direction: column;
+    -ms-flex-wrap: nowrap;
+        flex-wrap: nowrap;
     padding: 20px 40px 20px 20px;
   }
   .main-menu__links-container {
@@ -805,29 +842,12 @@ aside {
   }
 }
 
-@media screen and (max-height: 550px) {
-  .main-menu__container {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    width: 100%;
-    min-height: 80vh;
-    border: none;
-    padding: 0px;
-    -webkit-box-pack: center;
-        -ms-flex-pack: center;
-            justify-content: center;
-  }
-  .links p {
-    min-height: 40px;
-  }
-}
-
 .sign__container {
   position: absolute;
   width: 60%;
-  min-height: 99%;
+  max-height: 99%;
   padding: 30px;
+  overflow-x: hidden;
   border: 1px solid #a5a5a5;
   background-color: #222222;
   -webkit-box-orient: vertical;
@@ -1048,20 +1068,6 @@ aside {
   }
   .sign-up .submit button {
     width: 100%;
-  }
-}
-
-@media screen and (max-height: 550px) {
-  .sign__container {
-    width: 60%;
-    right: 20%;
-  }
-}
-
-@media screen and (max-height: 550px) and (max-width: 750px) {
-  .sign__container {
-    width: 90%;
-    right: 5%;
   }
 }
 
