@@ -1,0 +1,12 @@
+include data_comments.pug
+
+.feedback-comments__container 
+    each val in block
+        .feedback-comments__item
+            .comment 
+                .avatar
+                p=val.text
+            hr
+            span=val.name
+.button-feedback__container
+    p click here for more feedbacks 

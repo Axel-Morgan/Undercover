@@ -1,0 +1,14 @@
+.contact{
+    width: 50%;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+@media screen and (max-width: 850px){
+    .contact{
+        width: 100%;
+    }
+}
+
+@import 'contact_form/_contact_form';

@@ -1,0 +1,163 @@
+.feedback-comments__container {
+    width: 100%;
+    flex-direction: column;
+    align-items: center;
+}
+
+.feedback-comments__item{
+    width: 80%;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: flex-end;
+    font-family: ub-light;
+    margin: 30px 0px;
+
+    @for $i from 1 through 3 {
+        //Задание блоку с задним фоном изображения
+        &:nth-of-type(#{$i}) .comment .avatar{ 
+            background-image: url(../images/feedbacks/avatar_#{$i}.jpg);
+        }
+   }
+
+    .comment {
+        width: 100%;
+        flex-direction: row;
+        justify-content: flex-start;
+        align-items: flex-start;
+        padding-left: 20px;
+
+        .avatar{
+            width: 50px;
+            height: 50px;
+            margin-top: 5px;
+            background-size: 100% 100%;
+        }
+
+        p{
+            width: 80%;
+            margin-left: 30px;
+            align-items: flex-start;
+            text-align: justify;
+            color: $lightGray;
+        }
+    }
+
+    hr{
+        width: 100%;
+        height: 1px;
+        margin: 10px 0px 5px 0px;
+        background-color: $darkGold;
+    }
+
+    span{
+        width: 100%;
+        flex-direction: row;
+        justify-content: flex-end;
+        text-transform: uppercase;
+        color: $darkGold;
+        padding-right: 20px; 
+        font-size: 18px;
+    }
+}
+
+.button-feedback__container{
+    width: 100%;
+    flex-direction: row;
+    justify-content: center;
+    margin-top: 30px;
+
+    p {
+        text-transform: uppercase;
+        font-size: 14px;
+        font-family: ub-light; 
+        color: $lightGray;
+        transition: 0.3s;
+        cursor: pointer;
+
+        &:hover{
+            color: $darkGold;
+        }
+    }
+}
+
+$startFontSizeP: 20;
+$startFontSizeSpan: 18;
+$startImageSize: 50;
+
+@media screen and (min-width: 1600px){
+    .feedback-comments__item{
+        .comment {
+            .avatar{
+                width: calcSize($startImageSize, 1600);
+                height: calcSize($startImageSize, 1600);
+            }
+    
+            p{
+                font-size: calcSize($startFontSizeP, 1600);
+            }
+        }
+
+        span{
+            font-size: calcSize($startFontSizeSpan, 1600);
+        }
+    }
+    
+    .button-feedback__container{
+        p {
+            font-size: calcSize(14, 1600);
+        }
+    }
+    
+}
+
+@media screen and (max-width: 1000px){
+    .feedback-comments__item{
+        .comment {
+            .avatar{
+                width: calcSize($startImageSize, 1000);
+                height: calcSize($startImageSize, 1000);
+            }
+    
+            p{
+                font-size: calcSize($startFontSizeP, 1000);
+            }
+        }
+
+        span{
+            font-size: calcSize($startFontSizeSpan, 1000);
+        }
+    }
+    
+    .button-feedback__container{
+        p {
+            font-size: calcSize(14, 1000);
+        }
+    }
+    
+}
+
+@media screen and (max-width: 450px){
+    .feedback-comments__item{
+        .comment {
+            .avatar{
+                width: calcSize($startImageSize, 700);
+                height: calcSize($startImageSize, 700);
+            }
+    
+            p{
+                font-size: calcSize($startFontSizeP, 700);
+            }
+        }
+
+        span{
+            font-size: calcSize($startFontSizeSpan, 700);
+        }
+    }
+    
+    .button-feedback__container{
+        p {
+            font-size: calcSize(14, 700);
+        }
+    }
+    
+}

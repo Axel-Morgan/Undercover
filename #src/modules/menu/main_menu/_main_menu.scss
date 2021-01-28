@@ -1,7 +1,7 @@
 .main-menu__container{
     display: none;
     width: 100%;
-    min-height: 80vh;
+    max-height: 85vh;
     background-color: $bgColor;
     border: 1px solid $darkGray;
     justify-content: space-between;
@@ -104,10 +104,6 @@ $startMenuSearchSize: 22;
 }
 
 @media screen and (max-width: 1050px){
-    .main-menu__container{
-        min-height: auto;
-    }
-
     .links{
         p{
             font-size: calcSize($startMenuLinkSize, 950);
@@ -132,10 +128,11 @@ $startMenuSearchSize: 22;
 
 @media screen and (max-width: 750px){
     .main-menu__container{
-        min-height: 95vh;
+        max-height: 90vh;
         align-items: center;
         justify-content: flex-start;
         flex-direction: column;
+        flex-wrap: nowrap;
         padding: 20px 40px 20px 20px;
     }
 
@@ -163,6 +160,7 @@ $startMenuSearchSize: 22;
         background-image: none;
         justify-content: center;
         align-items: center;
+        margin-bottom: 100px;
     
         .search{
             width: 90%;
@@ -183,23 +181,6 @@ $startMenuSearchSize: 22;
         p{
             margin: 5px 20px;
             font-size: 18px;
-        }
-    }
-}
-
-@media screen and (max-height: 550px){
-    .main-menu__container{
-        display: flex;
-        width: 100%;
-        min-height: 80vh;
-        border: none;
-        padding: 0px;
-        justify-content: center;
-    }
-
-    .links{
-        p{
-            min-height: 40px;
         }
     }
 }

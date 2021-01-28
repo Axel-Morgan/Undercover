@@ -7,6 +7,7 @@ const menuButtons = {
 
 //Все, что имеет отношение к ведущему меню
 const mainMenu = {
+    body: document.querySelector('body'),
     header: document.querySelector('header'),
     footer: document.querySelector('footer'),
     sections: document.querySelectorAll('section'),
@@ -47,14 +48,19 @@ function toShowMenu(isShow){
 
     if (!isShow){
         menu.style.display = "flex";
+        menu.style.overflowY = "auto";
         mainMenu.isShow = true;
         menuButtons.mainButton.classList.add('itIsPush');
+        mainMenu.body.style.overflow = 'hidden';
     }
+
     else{
         menu.style.display = "";
+        menu.style.overflowY = "";
         mainMenu.isShow = false;
         toCloseSign();
         menuButtons.mainButton.classList.remove('itIsPush');
+        mainMenu.body.style.overflow = '';
     }
 }
 
@@ -63,12 +69,17 @@ function toOpenSign(val){
    let sign = (val == 0) ? signIn.signInContainer : signUp.signUpContainer;
 
    sign.style.display = "flex";
+   sign.style.overflowY = "auto";
+   mainMenu.menuContainer.style.overflowY = "";
 }
 
 //Закрытие Sign окон
 function toCloseSign(){
     signIn.signInContainer.style.display = "";
+    signIn.signInContainer.style.overflowY = "";
     signUp.signUpContainer.style.display = "";
+    signUp.signUpContainer.style.overflowY = "";
+    mainMenu.menuContainer.style.overflowY = "auto";
 }
 
 //Перемещаем скрол на необходимую секцию после выбора соответствующей ссылки

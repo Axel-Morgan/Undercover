@@ -1,0 +1,11 @@
+.contact-form__container
+    form(method="post" action="#") 
+        .field
+            input(type="text", placeholder="Name", require)
+        .field
+            input(type="text", placeholder="Email", require)
+        .field
+            textarea(rows="10", cols="45", name="text", placeholder="Your Message") 
+        .submit 
+            button(type="submit") send
+

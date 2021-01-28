@@ -1,0 +1,119 @@
+.contact-form__container{
+    width: 60%;
+    flex-direction: column;
+    align-items: center;
+
+    .field{
+        width: 100%;
+        height: auto;
+        border: 1px solid $lightGray;
+        margin-top: 20px;
+
+        input{
+            width: 100%;
+            padding: 10px;
+            border: 1px solid $lightGray;
+            background-color: $bgColor;
+            font-family: ub-light;
+            font-size: 20px;
+            color: $lightGray;
+            outline: none;
+        }
+
+        textarea{
+            width: 100%;
+            padding: 10px;
+            outline: none;
+            border: 1px solid $lightGray;
+            background-color: $bgColor;
+            color: $lightGray;
+            font-family: ub-light;
+            font-size: 20px;
+            resize: none;
+        }
+    }
+
+    .submit {
+        width: 100%;
+        flex-direction: row;
+        justify-content: center;
+
+        button{
+            background-color: $darkGold;
+            padding: 10px;
+            margin-top: 20px;
+            width: 25%;
+            font-family: ub-light;
+            font-size: 20px;
+            color: $bgColor;
+            text-transform: uppercase;
+            outline: none;
+            cursor: pointer;
+        }
+    }
+}
+
+$startFontSizePSign: 20;
+
+@media screen and (min-width: 1600px){
+    .contact-form__container{
+    
+        .field{
+            input{
+                font-size:  calcSize($startFontSizePSign, 1600);
+            }
+    
+            textarea{
+                font-size:  calcSize($startFontSizePSign, 1600);
+            }
+        }
+    
+        .submit {
+            button{
+                font-size:  calcSize($startFontSizePSign, 1600);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 1000px){
+    .contact-form__container{
+    
+        .field{
+            input{
+                font-size:  calcSize($startFontSizePSign, 1000);
+            }
+    
+            textarea{
+                font-size:  calcSize($startFontSizePSign, 1000);
+            }
+        }
+    
+        .submit {
+            button{
+                font-size:  calcSize($startFontSizePSign, 1000);
+            }
+        }
+    }
+}
+
+@media screen and (max-width: 450px){
+    .contact-form__container{
+    
+        .field{
+            input{
+                font-size:  calcSize($startFontSizePSign, 700);
+            }
+    
+            textarea{
+                font-size:  calcSize($startFontSizePSign, 700);
+            }
+        }
+    
+        .submit {
+            button{
+                font-size:  calcSize($startFontSizePSign, 700);
+            }
+        }
+    }
+}
