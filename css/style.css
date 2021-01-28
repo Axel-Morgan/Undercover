@@ -511,6 +511,7 @@ header {
 aside {
   position: fixed;
   width: 90%;
+  height: 85vh;
   top: 40px;
   right: 5%;
   -webkit-box-orient: horizontal;
@@ -555,6 +556,7 @@ aside {
 
 @media screen and (max-width: 750px) {
   aside {
+    min-height: 95vh;
     width: 60%;
     top: 20px;
     right: 0;
@@ -710,6 +712,7 @@ aside {
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
+  margin-bottom: 100px;
 }
 
 .main-menu__search .search {
@@ -774,7 +777,7 @@ aside {
 
 @media screen and (max-width: 750px) {
   .main-menu__container {
-    max-height: 95vh;
+    max-height: 90vh;
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
