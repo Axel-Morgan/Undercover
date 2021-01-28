@@ -712,7 +712,6 @@ aside {
   -webkit-box-align: end;
       -ms-flex-align: end;
           align-items: flex-end;
-  margin-bottom: 100px;
 }
 
 .main-menu__search .search {
@@ -826,6 +825,7 @@ aside {
     -webkit-box-align: center;
         -ms-flex-align: center;
             align-items: center;
+    margin-bottom: 100px;
   }
   .main-menu__search .search {
     width: 90%;
@@ -860,6 +860,7 @@ aside {
   -webkit-box-align: center;
       -ms-flex-align: center;
           align-items: center;
+  z-index: 500;
 }
 
 .sign__container p {
@@ -882,8 +883,8 @@ aside {
   right: -1px;
   width: 40px;
   height: 40px;
-  z-index: 201;
   cursor: pointer;
+  z-index: 500;
   -webkit-transition: 0.2s;
   transition: 0.2s;
 }
@@ -1077,7 +1078,7 @@ aside {
 .social-net__container {
   width: 100%;
   height: 120px;
-  padding: 20px 0px;
+  padding: 20px 5px;
   -webkit-box-orient: horizontal;
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
