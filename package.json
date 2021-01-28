@@ -15,6 +15,7 @@
   },
   "devDependencies": {
     "gulp-concat": "^2.6.1",
-    "gulp-imagemin": "^7.1.0"
+    "gulp-imagemin": "^7.1.0",
+    "gulp-minify": "^3.1.0"
   }
 }
