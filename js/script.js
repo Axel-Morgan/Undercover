@@ -30,6 +30,7 @@ const menuButtons = {
 
 //Все, что имеет отношение к ведущему меню
 const mainMenu = {
+    body: document.querySelector('body'),
     header: document.querySelector('header'),
     footer: document.querySelector('footer'),
     sections: document.querySelectorAll('section'),
@@ -70,14 +71,19 @@ function toShowMenu(isShow){
 
     if (!isShow){
         menu.style.display = "flex";
+        menu.style.overflowY = "auto";
         mainMenu.isShow = true;
         menuButtons.mainButton.classList.add('itIsPush');
+        mainMenu.body.style.overflow = 'hidden';
     }
+
     else{
         menu.style.display = "";
+        menu.style.overflowY = "";
         mainMenu.isShow = false;
         toCloseSign();
         menuButtons.mainButton.classList.remove('itIsPush');
+        mainMenu.body.style.overflow = '';
     }
 }
 
@@ -86,12 +92,17 @@ function toOpenSign(val){
    let sign = (val == 0) ? signIn.signInContainer : signUp.signUpContainer;
 
    sign.style.display = "flex";
+   sign.style.overflowY = "auto";
+   mainMenu.menuContainer.style.overflowY = "";
 }
 
 //Закрытие Sign окон
 function toCloseSign(){
     signIn.signInContainer.style.display = "";
+    signIn.signInContainer.style.overflowY = "";
     signUp.signUpContainer.style.display = "";
+    signUp.signUpContainer.style.overflowY = "";
+    mainMenu.menuContainer.style.overflowY = "auto";
 }
 
 //Перемещаем скрол на необходимую секцию после выбора соответствующей ссылки
@@ -488,6 +499,39 @@ function toMoveImageServices(val){
     bImg[val].style.top = verticalShift + 'px';
 }
 
+/*----------------------------ПОДСВЕТКА СЛОГАНА FOOTER----------------------------*/
+
+//-----------------------Подсвечиваем текст в зависимости от положения текста
+function lightingSloganFooter(){
+    let sloganLettersLength = document.querySelectorAll('.footer-slogan__container span'),
+        hue = 39, saturate = 30.8, lightness = 55.1,
+        h = hue, s = saturate, l = lightness, startPoint = 0;
+        borderS = 6.1, borderL = 25.9;
+    
+    startPoint = sloganLettersLength.length/2;
+
+    for (let i = startPoint; i >= 0; i--){  
+          
+        s -= (startPoint - i) * 0.1;
+        if (s < borderS) s = borderS;             
+        l -= (startPoint - i) * 0.1;
+        if (l < borderL) l = borderL;                  
+
+        sloganLettersLength[i].style.color = 'hsl(' + h + ', ' + s + '%, '+ l +'%)';
+    }
+
+   h = hue; s = saturate; l = lightness;
+
+    for (let i = startPoint; i < sloganLettersLength.length; i++){
+        s += (startPoint - i) * 0.1;
+        if (s < borderS) s = borderS;
+
+        l += (startPoint - i) * 0.1;
+        if (l < borderL) l = borderL;
+
+        sloganLettersLength[i].style.color = 'hsl(' + h + ', ' + s + '%, '+ l +'%)';
+    }
+}
 /*----------------------------ЛАМПОЧКА И ОСВЕЩЕНИЕ ТЕКСТА----------------------------*/
 //Параметры курсора
 const cursorLamp = {
@@ -682,37 +726,3 @@ lampMechanism.lampCollider.addEventListener("touchmove", function(){
     }
 });
 
-
-/*----------------------------ПОДСВЕТКА СЛОГАНА FOOTER----------------------------*/
-
-//-----------------------Подсвечиваем текст в зависимости от положения текста
-function lightingSloganFooter(){
-    let sloganLettersLength = document.querySelectorAll('.footer-slogan__container span'),
-        hue = 39, saturate = 30.8, lightness = 55.1,
-        h = hue, s = saturate, l = lightness, startPoint = 0;
-        borderS = 6.1, borderL = 25.9;
-    
-    startPoint = sloganLettersLength.length/2;
-
-    for (let i = startPoint; i >= 0; i--){  
-          
-        s -= (startPoint - i) * 0.1;
-        if (s < borderS) s = borderS;             
-        l -= (startPoint - i) * 0.1;
-        if (l < borderL) l = borderL;                  
-
-        sloganLettersLength[i].style.color = 'hsl(' + h + ', ' + s + '%, '+ l +'%)';
-    }
-
-   h = hue; s = saturate; l = lightness;
-
-    for (let i = startPoint; i < sloganLettersLength.length; i++){
-        s += (startPoint - i) * 0.1;
-        if (s < borderS) s = borderS;
-
-        l += (startPoint - i) * 0.1;
-        if (l < borderL) l = borderL;
-
-        sloganLettersLength[i].style.color = 'hsl(' + h + ', ' + s + '%, '+ l +'%)';
-    }
-}
